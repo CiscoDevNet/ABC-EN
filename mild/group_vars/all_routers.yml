@@ -1,0 +1,10 @@
+---
+primary_ntp_server: # <TODO> Add value for Primary NTP Server
+secondary_ntp_server: # <TODO> Add value for Secondary NTP Server
+domain_name: abc.en.com
+lldp_global:
+  holdtime: 10
+  enabled: true
+  reinit: 3
+  timer: 10
+  state: # <TODO> Add value to Merge the config with the running config
