@@ -1,0 +1,40 @@
+---
+all:
+  hosts:
+    inet-rtr1:
+      ansible_host: 192.168.10.10
+    inet-rtr2:
+      ansible_host: 192.168.10.11
+    core-rtr3:
+      ansible_host: 192.168.10.12
+    core-rtr4:
+      ansible_host: 192.168.10.13
+    access-rtr5:
+      ansible_host: 192.168.10.14
+    access-rtr6:
+      ansible_host: 192.168.10.15   
+  vars:
+    ansible_connection: local
+    ansible_user: "{{ vault_ansible_user }}"
+    ansible_password: "{{ vault_ansible_password }}"
+  children:
+    all_routers:
+      hosts:
+        inet-rtr1:
+        inet-rtr2:
+        core-rtr3:
+        core-rtr4:
+        access-rtr5:
+        access-rtr6:
+    inet_routers:
+      hosts:
+        inet-rtr1:
+        inet-rtr2:
+    core_routers:
+      hosts:
+        core-rtr3:
+        core-rtr4:
+    access_routers:
+      hosts:
+        access-rtr5:
+        access-rtr6:
