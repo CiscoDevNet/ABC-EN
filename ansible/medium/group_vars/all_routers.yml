@@ -1,0 +1,10 @@
+---
+primary_ntp_server: # <TODO> Set Primary NTP Server IP
+# <TODO> Add Secondary NTP Server and IP
+# <TODO> Set domain_name
+# <TODO> Set LLDP Parent Key
+  holdtime: 10
+  enabled: true
+  reinit: 3
+  timer: 10
+  state: # <TODO> Set State To Merge with Config

@@ -1,0 +1,32 @@
+---
+all:
+  hosts:
+    inet-rtr1:
+      ansible_host: # <TODO> Add IP Address 
+    inet-rtr2:
+      ansible_host: # <TODO> Add IP Address 
+    core-rtr3:
+      ansible_host: # <TODO> Add IP Address 
+    core-rtr4:
+      ansible_host: # <TODO> Add IP Address 
+    access-rtr5:
+      ansible_host: # <TODO> Add IP Address 
+    access-rtr6:
+      ansible_host: # <TODO> Add IP Address 
+  vars:
+    ansible_connection:  # <TODO> Add connection method
+    ansible_user:  # <TODO> Use vault variable to set API username
+    ansible_password:  # <TODO> Use vault variable to set API password
+  children:
+    all_routers:
+      hosts:
+        # <TODO> Add All hosts
+    inet_routers:
+      hosts:
+        # <TODO> Add inet routers
+    core_routers:
+      hosts:
+        # <TODO> Add core routers
+    access_routers:
+      hosts:
+        # <TODO> Add access routers
