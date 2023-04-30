@@ -1,0 +1,296 @@
+---
+devices:
+  inet-rtr1:
+    os: iosxe
+    platform: cat8k  # https://pubhub.devnetcloud.com/media/unicon/docs/user_guide/supported_platforms.html
+    connections:
+      defaults:
+        class: unicon.Unicon
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::10
+      arguments:
+        learn_hostname: true
+#        init_exec_commands: []
+#        init_config_commands: []
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+
+  inet-rtr2:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        class: unicon.Unicon
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::11
+      arguments:
+        learn_hostname: true
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+
+  core-rtr3:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        class: unicon.Unicon
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::12
+      arguments:
+        learn_hostname: true
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+
+  core-rtr4:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        class: unicon.Unicon
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::13
+      arguments:
+        learn_hostname: true
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+
+  access-rtr5:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        class: unicon.Unicon
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::14
+      arguments:
+        learn_hostname: true
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+
+  access-rtr6:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        class: unicon.Unicon
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::15
+      arguments:
+        learn_hostname: true
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+
+topology:
+  inet-rtr1:
+    interfaces:
+      Loopback0:
+        type: ethernet
+        description: Local Loopback
+        ipv6: 2001:db8:0:100::1
+        ipv6_prefix_length: 128
+        link_local: fe80::1
+#      GigabitEthernet1:
+#        type: ethernet
+#        description: Management
+#        ipv6: 2001:db8:c15:c0::10
+#        ipv6_prefix_length: 64
+      GigabitEthernet2:
+        type: ethernet
+        description: To provider-rtr1.g2
+        ipv6: 2001:db8:abc:11::2
+        ipv6_prefix_length: 64
+        link_local: fe80::1
+      GigabitEthernet3:
+        type: ethernet
+        description: To inet-rtr2.g3
+        ipv6: 2001:db8:0:12::1
+        ipv6_prefix_length: 64
+        link_local: fe80::1
+      GigabitEthernet4:
+        type: ethernet
+        description: To core-rtr2.g3
+        ipv6: 2001:db8:0:14::1
+        ipv6_prefix_length: 64
+        link_local: fe80::1
+      GigabitEthernet5:
+        type: ethernet
+        description: to core-rtr1.g2
+        ipv6: 2001:db8:0:13::1
+        ipv6_prefix_length: 64
+        link_local: fe80::1
+
+  inet-rtr2:
+    interfaces:
+      Loopback0:
+        type: ethernet
+        description: Local Loopback
+        ipv6: 2001:db8:0:100::2
+        ipv6_prefix_length: 128
+      GigabitEthernet2:
+        type: ethernet
+        description: To provider-rtr2.g2
+        ipv6: 2001:db8:def:22::2
+        ipv6_prefix_length: 64
+      GigabitEthernet3:
+        type: ethernet
+        description: To inet-rtr1.g3
+        ipv6: 2001:db8:0:12::2
+        ipv6_prefix_length: 64
+      GigabitEthernet4:
+        type: ethernet
+        description: To core-rtr1.g3
+        ipv6: 2001:db8:0:23::2
+        ipv6_prefix_length: 64
+      GigabitEthernet5:
+        type: ethernet
+        description: To core-rtr2.g2
+        ipv6: 2001:db8:0:24::2
+        ipv6_prefix_length: 64
+
+  core-rtr3:
+    interfaces:
+      Loopback0:
+        type: ethernet
+        description: Local Loopback
+        ipv6: 2001:db8:0:100::3
+        ipv6_prefix_length: 128
+      GigabitEthernet2:
+        type: ethernet
+        description: To inet-rtr1.g5
+        ipv6: 2001:db8:0:13::3
+        ipv6_prefix_length: 64
+      GigabitEthernet3:
+        type: ethernet
+        description: To inet-rtr2.g4
+        ipv6: 2001:db8:0:23::3
+        ipv6_prefix_length: 64
+      GigabitEthernet4:
+        type: ethernet
+        description: To core-rtr2.g4
+        ipv6: 2001:db8:0:34::3
+        ipv6_prefix_length: 64
+      GigabitEthernet5:
+        type: ethernet
+        description: To access-rtr2.g3
+        ipv6: 2001:db8:0:36::3
+        ipv6_prefix_length: 64
+      GigabitEthernet6:
+        type: ethernet
+        description: To access-rtr1.g2
+        ipv6: 2001:db8:0:35::3
+        ipv6_prefix_length: 64
+
+  core-rtr4:
+    interfaces:
+      Loopback0:
+        type: ethernet
+        description: Local Loopback
+        ipv6: 2001:db8:0:100::4
+        ipv6_prefix_length: 128
+      GigabitEthernet2:
+        type: ethernet
+        description: To inet-rtr2.g5
+        ipv6: 2001:db8:0:24::4
+        ipv6_prefix_length: 64
+      GigabitEthernet3:
+        type: ethernet
+        description: To inet-rtr1.g4
+        ipv6: 2001:db8:0:14::4
+        ipv6_prefix_length: 64
+      GigabitEthernet4:
+        type: ethernet
+        description: To core-rtr1.g4
+        ipv6: 2001:db8:0:34::4
+        ipv6_prefix_length: 64
+      GigabitEthernet5:
+        type: ethernet
+        description: To access-rtr1.g3
+        ipv6: 2001:db8:0:45::4
+        ipv6_prefix_length: 64
+      GigabitEthernet6:
+        type: ethernet
+        description: To access-rtr2.g2
+        ipv6: 2001:db8:0:46::4
+        ipv6_prefix_length: 64
+
+  access-rtr5:
+    interfaces:
+      Loopback0:
+        type: ethernet
+        description: Local Loopback
+        ipv6: 2001:db8:0:100::5
+        ipv6_prefix_length: 128
+      GigabitEthernet2:
+        type: ethernet
+        description: To core-rtr1.g6
+        ipv6: 2001:db8:0:35::5
+        ipv6_prefix_length: 64
+      GigabitEthernet3:
+        type: ethernet
+        description: To core-rtr2.g5
+        ipv6: 2001:db8:0:45::5
+        ipv6_prefix_length: 64
+
+  access-rtr6:
+    interfaces:
+      Loopback0:
+        type: ethernet
+        description: Local Loopback
+        ipv6: 2001:db8:0:100::6
+        ipv6_prefix_length: 128
+      GigabitEthernet2:
+        type: ethernet
+        description: To core-rtr2.g6
+        ipv6: 2001:db8:0:46::6
+        ipv6_prefix_length: 64
+      GigabitEthernet3:
+        type: ethernet
+        description: To core-rtr1.g5
+        ipv6: 2001:db8:0:36::6
+        ipv6_prefix_length: 64
+
+
+
+#
+#2023-04-26T19:38:10: %UNICON-WARNING: Device 'inet-rtr1' connection 'cli' does not have IP and/or port specified, ignoring
+#2023-04-26T19:38:10: %UNICON-WARNING: Device 'inet-rtr1' connection 'cli' does not have IP and/or port specified, ignoring
+#2023-04-26T19:38:10: %GENIE-ERROR: Traceback (most recent call last):
+#2023-04-26T19:38:10: %GENIE-ERROR:   File "src/unicon/adapters/topology.py", line 103, in unicon.adapters.topology.get_start_command
+#2023-04-26T19:38:10: %GENIE-ERROR: AttributeError: 'AttrDict' object has no attribute 'host'
+#2023-04-26T19:38:10: %GENIE-ERROR:
+#2023-04-26T19:38:10: %GENIE-ERROR: During handling of the above exception, another exception occurred:
+#2023-04-26T19:38:10: %GENIE-ERROR:
+#2023-04-26T19:38:10: %GENIE-ERROR: Traceback (most recent call last):
+#2023-04-26T19:38:10: %GENIE-ERROR:   File "src/genie/harness/_commons_internal.py", line 99, in genie.harness._commons_internal.connect.connection_task
+#2023-04-26T19:38:10: %GENIE-ERROR:   File "src/genie/harness/utils.py", line 309, in genie.harness.utils.connect_device
+#2023-04-26T19:38:10: %GENIE-ERROR:   File "src/genie/harness/utils.py", line 299, in genie.harness.utils.connect_device
+#2023-04-26T19:38:10: %GENIE-ERROR:   File "src/pyats/connections/manager.py", line 450, in pyats.connections.manager.ConnectionManager.connect
+#2023-04-26T19:38:10: %GENIE-ERROR:   File "src/pyats/connections/manager.py", line 419, in pyats.connections.manager.ConnectionManager.instantiate
+#2023-04-26T19:38:10: %GENIE-ERROR:   File "src/unicon/adapters/topology.py", line 399, in unicon.adapters.topology.Unicon
+#2023-04-26T19:38:10: %GENIE-ERROR:   File "src/unicon/adapters/topology.py", line 117, in unicon.adapters.topology.get_start_command
+#2023-04-26T19:38:10: %GENIE-ERROR: AttributeError: Connection cli doesn't have protocol, ip/host or port.
+#2023-04-26T19:38:10: %GENIE-ERROR: 'AttrDict' object has no attribute 'host'
