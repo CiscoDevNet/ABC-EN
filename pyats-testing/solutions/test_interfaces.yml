@@ -20,16 +20,6 @@ TestInterfaceConfiguration:
                   loop_variable_name: current_interface
                   value: "%VARIABLES{current_device._values.interfaces}"
                   actions:
-                    - print:
-                        item1:
-                          value: "Device: %VARIABLES{current_device._keys}"
-                        item2:
-                          value: "Interface: %VARIABLES{current_interface._keys}"
-                        item3:
-                          value: "Interface details: %VARIABLES{current_interface._values}"
-                        item4:
-                          value: "Interface description: %VARIABLES{current_interface._values.description}"
-
                     - parse:
                         command: show interfaces %VARIABLES{current_interface._keys} description
                         device: "%VARIABLES{current_device._keys}"
@@ -50,64 +40,3 @@ TestInterfaceConfiguration:
                               "%VARIABLES{current_interface._values.ipv6}/%VARIABLES{current_interface._values.ipv6_prefix_length}",
                               ignore_case_value=True, value_regex=True
                             )
-
-
-
-#              - parse:
-#                  command: show interfaces description
-#                  device: "%VARIABLES{current_device._keys}"
-##                  save:
-##                    - variable_name: parse_output
-#                  include:
-#                    - contains_key_value("description", "%{testbed.topology.current_device.interfaces}")
-##                    - contains_key_value("description", "%VARIABLES{intfs._values.description}")
-
-#
-#            actions:
-#              - print:
-#                  item1:
-#                    value: "%VARIABLES{current_device._keys}"
-#                  item2:
-#                    value: "%VARIABLES{current_device._values.interfaces}"
-#              - parse:
-#                  command: show interfaces description
-#                  device: "%VARIABLES{current_device._keys}"
-##                  save:
-##                    - variable_name: parse_output
-#                  include:
-#                    - contains_key_value("description", "%{testbed.topology.current_device.interfaces}")
-##                    - contains_key_value("description", "%VARIABLES{intfs._values.description}")
-
-
-#              - print:
-#                  item1:
-#                    value: "%VARIABLES{current_device}"
-#                  item2:
-#                    value: "%{testbed.devices.self.alias}"
-###                    value: "%{testbed.devices.self.alias}"
-
-##### BELOW WORKS
-#        - loop:
-#            loop_variable_name: intfs
-#            value: "%{testbed.topology.uut.interfaces}"
-#            actions:
-#              - print:
-#                  item:
-#                    value: "%VARIABLES{intfs._values}"
-#
-#              - parse:
-#                  command: show interfaces %VARIABLES{intfs._keys} description
-#                  device: uut
-#                  save:
-#                    - variable_name: parse_output
-#                  include:
-#                    - contains_key_value("description", "%VARIABLES{intfs._values.description}")
-#
-#              - parse:
-#                  command: show ipv6 interface %VARIABLES{intfs._keys}
-#                  device: uut
-#                  save:
-#                    - variable_name: parse_output
-#                  include:
-#                    - contains_key_value("ipv6", "%VARIABLES{intfs._values.link_local}", ignore_case_value=True, value_regex=True)
-#                    - contains_key_value("ipv6", "%VARIABLES{intfs._values.ipv6}/%VARIABLES{intfs._values.ipv6_prefix_length}", ignore_case_value=True, value_regex=True)
