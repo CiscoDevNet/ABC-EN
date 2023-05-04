@@ -1,0 +1,3 @@
+---
+host_interfaces:
+# <TODO> Create a list of interfaces, include a description, ipv6 address, link local address and lldp setting

@@ -1,0 +1,13 @@
+---
+host_interfaces:
+  - Loopback0:
+      description: "Local Loopback"
+      ipv6_address: # <TODO> add correct IPv6 IP
+      link_local: "fe80::2"
+      lldp: false
+  - GigabitEthernet2:
+      # <TODO> add a description
+      # <TODO> add an IPv6 address
+      # <TODO> add link local address
+      # <TODO> enable LLDP
+# <TODO> add remaining interfaces

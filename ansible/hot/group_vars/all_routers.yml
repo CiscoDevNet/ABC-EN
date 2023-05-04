@@ -1,10 +1,7 @@
 ---
-primary_ntp_server: # <TODO> Set Primary NTP Server IP
-# <TODO> Add Secondary NTP Server and IP
-# <TODO> Set domain_name
-lldp_global:
-  # <TODO> Set holdtime
-  # <TODO> Set enabled
-  reinit: 3
-  # <TODO> Set timer
-  state: # <TODO> Set state to merge config
+services:
+# <TODO> Make a list of services and enable them
+# <TODO> Add restconf
+# <TODO> Add NTP, include a source
+# <TODO> Add netconf, include features
+# <TODO> Add lldp

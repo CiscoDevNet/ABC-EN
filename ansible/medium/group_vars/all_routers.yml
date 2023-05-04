@@ -1,10 +1,14 @@
 ---
-primary_ntp_server: # <TODO> Set Primary NTP Server IP
-# <TODO> Add Secondary NTP Server and IP
-# <TODO> Set domain_name
-# <TODO> Set LLDP Parent Key
-  holdtime: 10
-  enabled: true
-  reinit: 3
-  timer: 10
-  state: # <TODO> Set State To Merge with Config
+services:
+  - # <TODO> add restconf
+      enabled: true
+  - # <TODO> add NTP
+      # <TODO> enable ntp
+      source: # <TODO> Set to Loopback0
+  - # <TODO> add netconf
+      # <TODO> enable netconf
+      features:
+        - "candidate-datastore"
+        # <TODO> Add the remaining netconf feature
+  - # <TODO> add lldp
+      # <TODO> enable lldp
