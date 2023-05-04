@@ -20,21 +20,8 @@ all:
   children:
     all_routers:
       hosts:
-        inet-rtr1:
-        inet-rtr2:
-        core-rtr3:
-        core-rtr4:
-        access-rtr5:
-        access-rtr6:
+        inet_routers:
     inet_routers:
       hosts:
         inet-rtr1:
         inet-rtr2:
-    core_routers:
-      hosts:
-        core-rtr3:
-        core-rtr4:
-    access_routers:
-      hosts:
-        access-rtr5:
-        access-rtr6:

@@ -1,0 +1,27 @@
+---
+host_interfaces:
+  - Loopback0:
+      description: # <TODO> description
+      ipv6_address: # <TODO> add correct IPv6 address
+      link_local: # <TODO> add correct IPv6 Link local address
+      lldp: false
+  - GigabitEthernet2:
+      description: # <TODO> add correct description
+      ipv6_address: # <TODO> add correct IPv6 address
+      link_local: # <TODO> add correct IPv6 Link local address
+      lldp: # <TODO> Enable LLDP
+  - GigabitEthernet3:
+      description: # <TODO> add correct description
+      ipv6_address: # <TODO> add correct IPv6 address
+      link_local: # <TODO> add correct IPv6 Link local address
+      lldp: # <TODO> Enable LLDP
+  - GigabitEthernet4:
+      description: # <TODO> add correct description
+      ipv6_address: # <TODO> add correct IPv6 address
+      link_local: # <TODO> add correct IPv6 Link local address
+      lldp: # <TODO> Enable LLDP
+  - GigabitEthernet5:
+      description: # <TODO> add correct description
+      ipv6_address: # <TODO> add correct IPv6 address
+      link_local: # <TODO> add correct IPv6 Link local address
+      lldp: # <TODO> Enable LLDP
