@@ -1,10 +1,14 @@
 ---
-primary_ntp_server: 192.168.10.20
-secondary_ntp_server: 192.168.10.21
-domain_name: abc.en.com
-lldp_global:
-  holdtime: 10
-  enabled: true
-  reinit: 3
-  timer: 10
-  state: merged
+services:
+  - restconf:
+      enabled: true
+  - ntp:
+      enabled: true
+      source: "Loopback0"
+  - netconf:
+      enabled: true
+      features:
+        - "candidate-datastore"
+        - "side-effect-sync*"
+  - lldp:
+      enabled: true

@@ -1,10 +1,14 @@
 ---
-primary_ntp_server: # <TODO> Add value for Primary NTP Server
-secondary_ntp_server: # <TODO> Add value for Secondary NTP Server
-domain_name: abc.en.com
-lldp_global:
-  holdtime: 10
-  enabled: true
-  reinit: 3
-  timer: 10
-  state: # <TODO> Add value to Merge the config with the running config
+services:
+  - restconf:
+      enabled: true
+  - ntp:
+      enabled: # <TODO> Enable NTP
+      source: # <TODO> String of the source (Loopback0)
+  - netconf:
+      enabled: # <TODO> Enable netconf
+      features:
+        - "candidate-datastore"
+        - # <TODO> Add remaining netconf features
+  - lldp:
+      enabled: # <TODO> Enable LLDP

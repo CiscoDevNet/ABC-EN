@@ -20,13 +20,7 @@ all:
   children:
     all_routers:
       hosts:
-        # <TODO> Add All hosts
+        inet_routers:
     inet_routers:
       hosts:
         # <TODO> Add inet routers
-    core_routers:
-      hosts:
-        # <TODO> Add core routers
-    access_routers:
-      hosts:
-        # <TODO> Add access routers
