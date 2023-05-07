@@ -1,0 +1,75 @@
+---
+#
+# Define variables for this trigger datafile. To access, use the syntax
+# "%{variables.variable_name}"
+variables:
+  pre_snapshot_directory: "%ENV{PWD}/pre_snapshots"
+  post_snapshot_directory: "%ENV{PWD}/post_snapshots"
+  device_names:
+    - core-rtr3
+    - core-rtr4
+
+#
+# Testcase unique IDs (uids) to execute. Unique IDs may be specified on the
+# CLI using the "--uids <uid>" but adding it here saves keystrokes!
+# By default, no testcases will be run without specifying the uids.
+uids:
+  - ConfigureWithSnapshots
+
+#
+# Name of this test (uid)
+ConfigureWithSnapshots:
+  source:
+    pkg: genie.libs.sdk
+    class: triggers.blitz.blitz.Blitz
+
+  test_sections:
+    - Change device configuration with pre and post snapshots:
+        - loop:
+            loop_variable_name: current_device
+            value: "%{variables.device_names}"
+            actions:
+              - api:
+                  device: "%VARIABLES{current_device}"
+                  function: get_valid_config_from_running_config
+                  custom_substep_message: "Get running-config pre snapshot from device"
+                  save:
+                    - variable_name: pre_change_config
+                    - file_name: "%{variables.pre_snapshot_directory}/%VARIABLES{current_device}.txt"
+
+              # <TODO> - Configure each device
+              - configure:
+                  device: "%VARIABLES{current_device}"
+                  custom_substep_message: "Apply device configuration"
+                  command: |
+                    ip http secure-server
+                    netconf-yang
+                    netconf-yang feature candidate-datastore
+                    netconf-yang feature side-effect-sync
+                    restconf
+                    lldp run
+
+              # <TODO> - Create post-change snapshots
+              - api:
+                  device: "%VARIABLES{current_device}"
+                  function: get_valid_config_from_running_config
+                  custom_substep_message: "Get running-config post snapshot from device"
+                  save:
+                    - variable_name: post_change_config
+                    - file_name: "%{variables.post_snapshot_directory}/%VARIABLES{current_device}.txt"
+
+              # <TODO> - Generate snapshot diff and save to a variable
+              - api:
+                  device: "%VARIABLES{current_device}"
+                  function: diff_configuration
+                  custom_substep_message: "Perform diff of pre and post snapshots"
+                  arguments:
+                    config1: "%VARIABLES{pre_change_config}"
+                    config2: "%VARIABLES{post_change_config}"
+                  save:
+                    - variable_name: diff_result
+
+              # <TODO> - Print the configuration diff
+              - print:
+                  item:
+                    value: "%VARIABLES{diff_result}"
