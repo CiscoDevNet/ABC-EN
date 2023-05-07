@@ -1,0 +1,15 @@
+#
+# Override the default subsections and don't perform ANY task when the job is
+# started. Only connect to the device(s) and perform tasks defined in the
+# trigger datafile.
+#
+---
+setup:
+  sections:
+    connect:
+      method: genie.harness.commons.connect
+  order:
+    - connect
+
+cleanup:
+  sections:

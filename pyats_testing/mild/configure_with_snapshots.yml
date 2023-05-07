@@ -1,0 +1,46 @@
+---
+#
+# Define variables for this trigger datafile. To access, use the syntax
+# "%{variables.variable_name}"
+variables:
+  pre_snapshot_directory: # <TODO> - Define pre-snapshot directory
+  post_snapshot_directory: # <TODO> - Define post-snapshot directory
+  device_names:
+    - # <TODO> - define first device name from testbed
+    - # <TODO> - define second device name from testbed
+
+#
+# Testcase unique IDs (uids) to execute. Unique IDs may be specified on the
+# CLI using the "--uids <uid>" but adding it here saves keystrokes!
+# By default, no testcases will be run without specifying the uids.
+uids:
+  - ConfigureWithSnapshots
+
+#
+# Name of this test (uid)
+ConfigureWithSnapshots:
+  source:
+    pkg: genie.libs.sdk
+    class: triggers.blitz.blitz.Blitz
+
+  test_sections:
+    - Change device configuration with pre and post snapshots:
+        - loop:
+            loop_variable_name: current_device
+            value: # <TODO> - Use a variable containing device names
+            actions:
+              - api:
+                  device: # <TODO> - Use a variable for the current device
+                  function: # <TODO> - Use a Genie API to get running-config
+                  custom_substep_message: "Get running-config pre snapshot from device"
+                  save:
+                    - variable_name: pre_change_config
+                    - file_name: # <TODO> - Specify the pre-change snapshot filename
+
+              # <TODO> - Configure each device
+
+              # <TODO> - Create post-change snapshots
+
+              # <TODO> - Generate snapshot diff and save to a variable
+
+              # <TODO> - Print the configuration diff

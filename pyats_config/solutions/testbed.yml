@@ -1,0 +1,113 @@
+---
+devices:
+  core-rtr3:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::12
+      arguments:
+        learn_hostname: true
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+
+  core-rtr4:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::13
+      arguments:
+        learn_hostname: true
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+
+#
+#topology:
+#  core-rtr3:
+#    interfaces:
+#      Loopback0:
+#        type: ethernet
+#        enabled: true
+#        description: Local Loopback
+#        ipv6: 2001:db8:0:100::3
+#        ipv6_prefix_length: 128
+#      GigabitEthernet2:
+#        type: ethernet
+#        enabled: true
+#        description: To inet-rtr1.g5
+#        ipv6: 2001:db8:0:13::3
+#        ipv6_prefix_length: 64
+#      GigabitEthernet3:
+#        type: ethernet
+#        enabled: true
+#        description: To inet-rtr2.g4
+#        ipv6: 2001:db8:0:23::3
+#        ipv6_prefix_length: 64
+#      GigabitEthernet4:
+#        type: ethernet
+#        enabled: true
+#        description: To core-rtr2.g4
+#        ipv6: 2001:db8:0:34::3
+#        ipv6_prefix_length: 64
+#      GigabitEthernet5:
+#        type: ethernet
+#        enabled: true
+#        description: To access-rtr2.g3
+#        ipv6: 2001:db8:0:36::3
+#        ipv6_prefix_length: 64
+#      GigabitEthernet6:
+#        type: ethernet
+#        enabled: true
+#        description: To access-rtr1.g2
+#        ipv6: 2001:db8:0:35::3
+#        ipv6_prefix_length: 64
+#
+#  core-rtr4:
+#    interfaces:
+#      Loopback0:
+#        type: ethernet
+#        enabled: true
+#        description: Local Loopback
+#        ipv6: 2001:db8:0:100::4
+#        ipv6_prefix_length: 128
+#      GigabitEthernet2:
+#        type: ethernet
+#        enabled: true
+#        description: To inet-rtr2.g5
+#        ipv6: 2001:db8:0:24::4
+#        ipv6_prefix_length: 64
+#      GigabitEthernet3:
+#        type: ethernet
+#        enabled: true
+#        description: To inet-rtr1.g4
+#        ipv6: 2001:db8:0:14::4
+#        ipv6_prefix_length: 64
+#      GigabitEthernet4:
+#        type: ethernet
+#        enabled: true
+#        description: To core-rtr1.g4
+#        ipv6: 2001:db8:0:34::4
+#        ipv6_prefix_length: 64
+#      GigabitEthernet5:
+#        type: ethernet
+#        enabled: true
+#        description: To access-rtr1.g3
+#        ipv6: 2001:db8:0:45::4
+#        ipv6_prefix_length: 64
+#      GigabitEthernet6:
+#        type: ethernet
+#        enabled: true
+#        description: To access-rtr2.g2
+#        ipv6: 2001:db8:0:46::4
+#        ipv6_prefix_length: 64

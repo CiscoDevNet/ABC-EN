@@ -1,0 +1,25 @@
+---
+devices:
+  core-rtr3:
+    os: # <TODO> - specify the operating system of the device
+    platform: # <TODO> - specify the correct device platform
+    connections:
+      defaults:
+        via: # <TODO> - Specify default connection method
+      cli:
+        protocol: ssh
+        ip: # <TODO> - Enter the managment IP of the router
+    credentials:
+      default:
+        username: # <TODO> - Set username for the connection
+        # <TODO> - Set password for the connection
+
+  core-rtr4:
+    os: # <TODO> - specify the operating system of the device
+    platform: # <TODO> - specify the correct device platform
+    connections:
+      defaults:
+        via: cli
+      # <TODO> - Define CLI connection for core-rtr4
+    credentials:
+      # <TODO> - Define credentials for core-rtr4
