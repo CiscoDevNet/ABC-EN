@@ -1,3 +1,24 @@
 ---
 host_interfaces:
-# <TODO> Create a list of interfaces, include a description, ipv6 address, link local address and lldp setting
+  - Loopback0:
+    # <TODO> Complete Loopback settings
+  - GigabitEthernet2:
+      description: "To provider-rtr-2.g2"
+      ipv6_address: "2001:db8:def:22::2/64"
+      link_local: "fe80::2"
+      lldp: true
+  - GigabitEthernet3:
+      description: "To inet-rtr1.g3"
+      ipv6_address: "2001:db8:0:12::2/64"
+      link_local: "fe80::2"
+      lldp: true
+  - GigabitEthernet4:
+      description: "To core-rtr3.g3"
+      ipv6_address: "2001:db8:0:23::2/64"
+      link_local: "fe80::2"
+      lldp: true
+  - GigabitEthernet5:
+      description: "To core-rtr4.g2"
+      ipv6_address: "2001:db8:0:24::2/64"
+      link_local: "fe80::2"
+      lldp: true

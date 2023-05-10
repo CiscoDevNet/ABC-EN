@@ -1,27 +1,27 @@
 ---
 host_interfaces:
   - Loopback0:
-      description: # <TODO> description
-      ipv6_address: # <TODO> add correct IPv6 address
-      link_local: # <TODO> add correct IPv6 Link local address
+      description: "Local Loopback"
+      ipv6_address: "2001:db8:0:255::1/128"
+      link_local: "fe80::1"
       lldp: false
   - GigabitEthernet2:
-      description: # <TODO> add correct description
-      ipv6_address: # <TODO> add correct IPv6 address
-      link_local: # <TODO> add correct IPv6 Link local address
-      lldp: # <TODO> Enable LLDP
+      description: # <TODO> Set Description
+      ipv6_address: "2001:db8:abc:11::1/64"
+      link_local: # <TODO> Set Link Local Address
+      lldp: true
   - GigabitEthernet3:
-      description: # <TODO> add correct description
-      ipv6_address: # <TODO> add correct IPv6 address
-      link_local: # <TODO> add correct IPv6 Link local address
-      lldp: # <TODO> Enable LLDP
+      description: "To inet-rtr2.g3"
+      ipv6_address: "2001:db8:0:12::1/64"
+      link_local: "fe80::1"
+      lldp: true
   - GigabitEthernet4:
-      description: # <TODO> add correct description
-      ipv6_address: # <TODO> add correct IPv6 address
-      link_local: # <TODO> add correct IPv6 Link local address
-      lldp: # <TODO> Enable LLDP
+      description: "To core-rtr4.g3"
+      ipv6_address: "2001:db8:0:14::1/64"
+      link_local: "fe80::1"
+      lldp: true
   - GigabitEthernet5:
-      description: # <TODO> add correct description
-      ipv6_address: # <TODO> add correct IPv6 address
-      link_local: # <TODO> add correct IPv6 Link local address
-      lldp: # <TODO> Enable LLDP
+      description: "To core-rtr3.g2"
+      ipv6_address: "2001:db8:0:13::1/64"
+      link_local: "fe80::1"
+      lldp: true
