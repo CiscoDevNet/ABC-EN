@@ -8,6 +8,6 @@ services:
     enabled: true
     features:
       - "candidate-datastore"
-      - "side-effect-sync*"
+      - "side-effect-sync"
   lldp:
     enabled: true
