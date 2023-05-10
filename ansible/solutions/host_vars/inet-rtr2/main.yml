@@ -1,5 +1,7 @@
 ---
 hostname: inet-rtr2
 ntp:
-  server: "2001:db8:def:22::ffff"
-  peer: "2001:db8:0:255::1"
+  servers:
+    - "2001:db8:def:22::ffff"
+  peers:
+    - "2001:db8:0:255::1"
