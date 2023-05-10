@@ -5,14 +5,6 @@ all:
       ansible_host: 192.168.10.10
     inet-rtr2:
       ansible_host: 192.168.10.11
-    core-rtr3:
-      ansible_host: 192.168.10.12
-    core-rtr4:
-      ansible_host: 192.168.10.13
-    access-rtr5:
-      ansible_host: 192.168.10.14
-    access-rtr6:
-      ansible_host: 192.168.10.15   
   vars:
     ansible_connection: local
     ansible_user: "{{ vault_ansible_user }}"
