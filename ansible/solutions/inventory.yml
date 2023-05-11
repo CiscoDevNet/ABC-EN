@@ -6,7 +6,6 @@ all:
     inet-rtr2:
       ansible_host: 192.168.10.11
   vars:
-    ansible_connection: local
     ansible_user: "{{ vault_ansible_user }}"
     ansible_password: "{{ vault_ansible_password }}"
   children:
