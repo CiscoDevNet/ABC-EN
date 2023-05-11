@@ -2,17 +2,20 @@
 all:
   hosts:
     inet-rtr1:
-      ansible_host: 192.168.10.10
+      ansible_host: 2001:db8:c15:c0::11
     inet-rtr2:
-      ansible_host: 192.168.10.11
-  vars:
-    ansible_user: "{{ vault_ansible_user }}"
-    ansible_password: "{{ vault_ansible_password }}"
+      ansible_host: 2001:db8:c15:c0::12
   children:
-    all_routers:
-      hosts:
-        inet_routers:
     inet_routers:
       hosts:
         inet-rtr1:
         inet-rtr2:
+    all_routers:
+      hosts:
+        inet_routers:
+      vars:
+        ansible_connection: ansible.netcommon.network_cli
+        ansible_network_os: cisco.ios.ios
+        ansible_network_cli_ssh_type: libssh
+        ansible_user: "{{ vault_ansible_user }}"
+        ansible_password: "{{ vault_ansible_password }}"
