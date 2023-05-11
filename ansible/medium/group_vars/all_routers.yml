@@ -1,14 +1,12 @@
 ---
 services:
-  - # <TODO> add restconf
-      enabled: true
-  - # <TODO> add NTP
-      # <TODO> enable ntp
-      source: # <TODO> Set to Loopback0
-  - # <TODO> add netconf
-      # <TODO> enable netconf
-      features:
-        - "candidate-datastore"
-        # <TODO> Add the remaining netconf feature
-  - # <TODO> add lldp
-      # <TODO> enable lldp
+  restconf:
+    enabled: true
+  # <TODO> Set NTP
+    # <TODO> Set Source of NTP
+  netconf:
+    # <TODO> Enable netconf
+    features:
+      - "candidate-datastore"
+      - "side-effect-sync"
+  # <TODO> Set LLDP and enable it
