@@ -11,7 +11,7 @@ all:
         inet-rtr1:
         inet-rtr2:
     all_routers:
-      hosts:
+      children:
         inet_routers:
       vars:
         ansible_connection: ansible.netcommon.network_cli
