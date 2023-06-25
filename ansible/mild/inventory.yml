@@ -5,13 +5,17 @@ all:
       ansible_host: # <TODO> Add IP Address 
     inet-rtr2:
       ansible_host: # <TODO> Add IP Address 
-  vars:
-    ansible_user:  # <TODO> Use vault variable to set API username
-    ansible_password:  # <TODO> Use vault variable to set API password
   children:
-    all_routers:
-      hosts:
-        inet_routers:
     inet_routers:
       hosts:
-        # <TODO> Add inet routers
+        inet-rtr1:
+        inet-rtr2:
+    all_routers:
+      children:
+        inet_routers:
+      vars:
+        ansible_connection: ansible.netcommon.network_cli
+        ansible_network_os: cisco.ios.ios
+        ansible_network_cli_ssh_type: libssh
+        ansible_user: "{{ vault_ansible_user }}"
+        ansible_password: "{{ vault_ansible_password }}"
