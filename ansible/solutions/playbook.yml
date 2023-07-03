@@ -24,6 +24,15 @@
       debug:
         var: ios_facts_results
 
+- name: Configure NTP Source Interface
+  hosts: all_routers
+  gather_facts: False
+  tasks:
+    - name: Configure NTP Source Interface
+      cisco.ios.ios_ntp_global:
+        config:
+          source: "{{ services.ntp.source }}"
+
 - name: Configure NTP Servers
   hosts: all_routers
   gather_facts: False
@@ -83,14 +92,14 @@
         lines:
           - ip http secure-server
           - restconf
-      when: "{{ services.restconf.enabled }}"
+      when: services.restconf.enabled
 
     - name: Enable NETCONF
       cisco.ios.ios_config:
         lines:
           - netconf-yang
           - netconf-yang feature {{ item }}
-      when: "{{ services.netconf.enabled }}"
+      when: services.netconf.enabled
       with_items: "{{ services.netconf.features }}"
 
 - name: Copy Run Start

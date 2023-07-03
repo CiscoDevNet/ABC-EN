@@ -1,0 +1,108 @@
+---
+# - name: Gather Built In Facts
+#   hosts: all_routers
+#   gather_facts: True
+#   tasks:
+#     - name: Display All Built In Facts
+#       debug:
+#         msg: "{{ ansible_facts }}"
+
+#     - name: Display IOS Version
+#       debug:
+#         msg: <TODO - PRINT Just the network version>
+
+# - name: Gather IOS Facts
+#   hosts: all_routers
+#   gather_facts: False
+#   tasks:
+#     - name: Gather IOS Facts with Cisco module
+#       cisco.ios.ios_facts:
+#         gather_subset: all
+#       register: ios_facts_results
+    
+#     - name: Display Cisco IOS Facts
+#       debug:
+#         var: <TODO - Select Variable to display to screen>
+
+# - name: Configure NTP Source Interface
+#   hosts: all_routers
+#   gather_facts: False
+#   tasks:
+#     - name: Configure NTP Source Interface
+#       cisco.ios.<TODO - Select NTP Global module>:
+#         config:
+#           source: "{{ services.ntp.source }}"
+
+# - name: Configure NTP Servers
+#   hosts: all_routers
+#   gather_facts: False
+#   tasks:
+#     - name: Configure NTP Servers
+#       cisco.ios.ios_ntp_global:
+#         config:
+#           servers:
+#             - server: "{{ item }}"
+#       with_items: <TODO - Set NTP Loop>
+
+# - name: Configure NTP Peers
+#   hosts: all_routers
+#   gather_facts: False
+#   tasks:
+#     - name: Configure NTP Peers
+#       cisco.ios.ios_ntp_global:
+#         config:
+#           peers:
+#             - peer: <TODO - Select iteration item>
+#               prefer: true
+#       with_items: "{{ ntp.peers }}"
+
+# - name: Enable LLDP
+#   hosts: all_routers
+#   gather_facts: False
+#   tasks:
+#     - name: Enable LLDP Service
+#       cisco.ios.ios_lldp:
+#         state: <TODO - Set state to present>
+    
+    # - name: Enable LLDP on interfaces
+    #   cisco.ios.<TODO - Select the correct Ansible LLDP module>
+    #     config:
+    #       - name: GigabitEthernetEthernet1
+    #         receive: true
+    #         transmit: true
+    #       - name: GigabitEthernetEthernet2
+    #         receive: true
+    #         transmit: true
+    #       - name: GigabitEthernetEthernet3
+    #         receive: true
+    #         transmit: true
+    #       - name: <TODO - GigabitEthernet4>
+    #       - name: <TODO - GigabitEthernet5>
+
+# - name: Enable various services using IOS CONFIG
+#   hosts: <TODO - Scope the playbook to target all routers>
+#   gather_facts: False
+#   tasks:
+#     - name: Enable RESTCONF
+#       cisco.ios.ios_config:
+#         lines:
+#           - ip http secure-server
+#           - restconf
+#       when: <TODO - Set group variable for restconf enabled>
+
+    # - name: Enable NETCONF
+    #   cisco.ios.ios_config:
+    #     lines:
+    #       - netconf-yang
+    #       - netconf-yang feature {{ item }}
+    #   when: <TODO - Set group variable for netconf enabled>
+    #   with_items: <TODO - Select group variable for netconf features to loop over>
+
+# - name: Copy Run Start
+#   hosts: all_routers
+#   gather_facts: <TODO - Do Not Gather Facts
+#   tasks:
+#     - name: Copy Run Start
+#       cisco.ios.<TODO - use the ios_command module>:
+#         commands: 
+#           - command: write mem
