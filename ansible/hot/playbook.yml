@@ -4,11 +4,11 @@
 #   gather_facts: <TODO - Gather facts>
 #   tasks:
 #     - name: Display All Built In Facts
-#       debug:
+#       ansible.builtin.debug:
 #         msg: "{{ ansible_facts }}"
 
 #     - name: Display IOS Version
-#       debug:
+#       ansible.builtin.debug:
 #         msg: <TODO - PRINT Just the network version>
 
 #     - name: Gather IOS Facts with Cisco module

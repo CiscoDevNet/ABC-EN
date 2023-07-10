@@ -4,11 +4,11 @@
   gather_facts: True
   tasks:
     - name: Display All Built In Facts
-      debug:
+      ansible.builtin.debug:
         msg: "{{ ansible_facts }}"
 
     - name: Display IOS Version
-      debug:
+      ansible.builtin.debug:
         msg: "{{ ansible_facts['net_version'] }}"        
 
     - name: Gather IOS Facts with Cisco module
@@ -17,7 +17,7 @@
       register: ios_facts_results
     
     - name: Display Cisco IOS Facts
-      debug:
+      ansible.builtin.debug:
         var: ios_facts_results
 
 - name: Configure NTP Source Interface
