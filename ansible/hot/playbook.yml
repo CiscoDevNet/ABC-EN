@@ -11,10 +11,6 @@
 #       debug:
 #         msg: <TODO - PRINT Just the network version>
 
-# - name: Gather IOS Facts
-#   hosts: all_routers
-#   gather_facts: False
-#   tasks:
 #     - name: Gather IOS Facts with Cisco module
 #       <TODO - Select the IOS Facts module>:
 #         <TODO - Gather all subsets of facts>

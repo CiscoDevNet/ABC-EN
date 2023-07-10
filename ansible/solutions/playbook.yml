@@ -11,10 +11,6 @@
       debug:
         msg: "{{ ansible_facts['net_version'] }}"        
 
-- name: Gather IOS Facts
-  hosts: all_routers
-  gather_facts: False
-  tasks:
     - name: Gather IOS Facts with Cisco module
       cisco.ios.ios_facts:
         gather_subset: all
