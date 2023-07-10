@@ -1,0 +1,25 @@
+---
+# - name: Enable LLDP
+#   hosts: all_routers
+#   gather_facts: False
+#   tasks:
+#   - name: Enable LLDP Service
+#     cisco.ios.ios_lldp_global:
+#       config:
+#         enabled: <TODO Enable LLDP>
+#       state: merged
+    
+    # - name: Enable LLDP on interfaces
+    #   cisco.ios.<TODO - Select the correct Ansible LLDP module>
+    #     config:
+    #       - name: GigabitEthernetEthernet1
+    #         receive: true
+    #         transmit: true
+    #       - name: GigabitEthernetEthernet2
+    #         receive: true
+    #         transmit: true
+    #       - name: GigabitEthernetEthernet3
+    #         receive: true
+    #         transmit: true
+    #       - name: <TODO - GigabitEthernet4>
+    #       - name: <TODO - GigabitEthernet5>

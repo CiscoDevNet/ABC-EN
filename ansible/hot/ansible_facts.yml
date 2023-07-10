@@ -1,0 +1,20 @@
+---
+# - name: Gather Built In Facts
+#   hosts: <TODO - Scope the task for all routers>
+#   gather_facts: <TODO - Gather facts>
+#   tasks:
+#     - name: Display All Built In Facts
+#       ansible.builtin.debug:
+#         msg: "{{ ansible_facts }}"
+
+#     - name: Display IOS Version
+#       ansible.builtin.debug:
+#         msg: <TODO - PRINT Just the network version>
+
+#     - name: Gather IOS Facts with Cisco module
+#       <TODO - Select the IOS Facts module>:
+#         <TODO - Gather all subsets of facts>
+#       <TODO - REGISTER A VARIABLE>
+    
+#     - name: Display Cisco IOS Facts
+#       <TODO - Select Variable to display to screen>

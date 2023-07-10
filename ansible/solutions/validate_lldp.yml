@@ -1,0 +1,22 @@
+---
+- name: Validate LLDP Configuration
+  hosts: all_routers
+  gather_facts: False
+  tasks:
+    - name: Validate LLDP Configuration
+      cisco.ios.ios_lldp_global:
+        state: gathered
+      register: lldp_configuration
+
+    - name: Print LLDP Global Configuration
+      ansible.builtin.debug:
+        var: lldp_configuration.gathered
+
+    - name: Enable LLDP on interfaces
+      cisco.ios.ios_lldp_interfaces:
+        state: gathered
+      register: lldp_interface_configuration
+
+    - name: Print LLDP Inteface Configuration
+      ansible.builtin.debug:
+        var: lldp_interface_configuration.gathered

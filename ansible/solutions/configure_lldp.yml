@@ -1,0 +1,29 @@
+---
+- name: Enable LLDP
+  hosts: all_routers
+  gather_facts: False
+  tasks:
+    - name: Enable LLDP Service
+      cisco.ios.ios_lldp_global:
+        config:
+          enabled: true
+        state: merged
+    
+    - name: Enable LLDP on interfaces
+      cisco.ios.ios_lldp_interfaces:
+        config:
+          - name: GigabitEthernet1
+            receive: true
+            transmit: true
+          - name: GigabitEthernet2
+            receive: true
+            transmit: true
+          - name: GigabitEthernet3
+            receive: true
+            transmit: true
+          - name: GigabitEthernet4
+            receive: true
+            transmit: true
+          - name: GigabitEthernet5
+            receive: true
+            transmit: true

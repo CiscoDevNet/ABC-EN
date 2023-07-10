@@ -1,0 +1,17 @@
+---
+# - name: Configure NTP Source Interface
+#   hosts: all_routers
+#   gather_facts: False
+#   tasks:
+#     - name: Configure NTP Source Interface
+#       <TODO - Select NTP Global module>
+
+#     - name: Configure NTP Servers
+#       <TODO - Select NTP Global module>:
+#         config:
+#           <TODO - Configure Servers>:
+#             <TODO - Select Item for iteration>
+#         <TODO - Set NTP Loop>
+
+#     - name: Configure NTP Peers
+#       <TODO - Setup NTP peers>

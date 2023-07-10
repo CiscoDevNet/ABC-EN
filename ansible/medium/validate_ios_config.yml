@@ -1,0 +1,8 @@
+---
+- name: Validate IOS Configuration changes
+  hosts: all_routers
+  gather_facts: False
+  tasks:
+    - name: Diff Against Startup
+      <TODO Select correct Cisco module>:
+        diff_against: <TODO Specify startup config>
