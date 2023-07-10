@@ -1,0 +1,19 @@
+---
+# - name: Enable various services using IOS CONFIG
+#   hosts: <TODO - Scope the playbook to target all routers>
+#   gather_facts: False
+#   tasks:
+#     - name: Enable RESTCONF
+#       cisco.ios.ios_config:
+#         lines:
+#           - ip http secure-server
+#           - restconf
+#       when: <TODO - Set group variable for restconf enabled>
+
+    # - name: Enable NETCONF
+    #   cisco.ios.ios_config:
+    #     lines:
+    #       - netconf-yang
+    #       - netconf-yang feature {{ item }}
+    #   when: <TODO - Set group variable for netconf enabled>
+    #   with_items: <TODO - Select group variable for netconf features to loop over>

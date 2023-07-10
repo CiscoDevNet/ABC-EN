@@ -1,0 +1,16 @@
+---
+# - name: Enable various services using IOS CONFIG
+#   hosts: <TODO - Scope the playbook to target all routers>
+#   gather_facts: False
+#   tasks:
+#     - name: Enable RESTCONF
+#       <TODO - Select the IOS Config module>
+#         lines:
+#           <TODO - Configure ip http secure server and restconf>
+#       when: <TODO - Set group variable for restconf enabled>
+
+    # - name: Enable NETCONF
+    #   <TODO - Select the IOS Config module>
+    #     <TODO - Enable NETCONF>
+    #   when: <TODO - Set group variable for netconf enabled>
+    #   with_items: <TODO - Select group variable for netconf features to loop over>

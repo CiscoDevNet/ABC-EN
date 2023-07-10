@@ -1,0 +1,24 @@
+---
+# - name: Configure NTP Source Interface
+#   hosts: all_routers
+#   gather_facts: False
+#   tasks:
+#     - name: Configure NTP Source Interface
+#       <TODO - Select NTP Global module>:
+#         config:
+#           source: "{{ services.ntp.source }}"
+
+#     - name: Configure NTP Servers
+#       <TODO - Select NTP Global module>:
+#         config:
+#           <TODO - Configure Servers>:
+#             - server: <TODO - Select Item for iteration>
+#       with_items: <TODO - Set NTP Loop>
+
+#     - name: Configure NTP Peers
+#       cisco.ios.ios_ntp_global:
+#         config:
+#           peers:
+#             - peer: <TODO - Select iteration item>
+#               prefer: true
+#       <TODO - Setup loop to iterate over NTP peers>

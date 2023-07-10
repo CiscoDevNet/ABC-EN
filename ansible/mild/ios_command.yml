@@ -1,0 +1,9 @@
+---
+# - name: Copy Run Start
+#   hosts: all_routers
+#   gather_facts: <TODO - Do Not Gather Facts
+#   tasks:
+#     - name: Copy Run Start
+#       cisco.ios.<TODO - use the ios_command module>:
+#         commands: 
+#           - command: write mem
