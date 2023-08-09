@@ -1,7 +1,7 @@
 ---
 - name: Configure NTP Source Interface
   hosts: all_routers
-  gather_facts: False
+  gather_facts: false
   tasks:
     - name: Configure NTP Source Interface
       cisco.ios.ios_ntp_global:

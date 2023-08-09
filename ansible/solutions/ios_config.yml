@@ -1,7 +1,7 @@
 ---
 - name: Enable various services using IOS CONFIG
   hosts: all_routers
-  gather_facts: False
+  gather_facts: false
   tasks:
     - name: Enable RESTCONF
       cisco.ios.ios_config:
@@ -17,4 +17,3 @@
           - netconf-yang feature {{ item }}
       when: services.netconf.enabled
       with_items: "{{ services.netconf.features }}"
-
