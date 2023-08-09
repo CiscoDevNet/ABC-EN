@@ -1,7 +1,7 @@
 ---
 - name: Validate LLDP Configuration
   hosts: all_routers
-  gather_facts: False
+  gather_facts: false
   tasks:
     - name: Validate LLDP Configuration
       cisco.ios.ios_lldp_global:

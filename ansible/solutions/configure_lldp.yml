@@ -1,14 +1,14 @@
 ---
 - name: Enable LLDP
   hosts: all_routers
-  gather_facts: False
+  gather_facts: false
   tasks:
     - name: Enable LLDP Service
       cisco.ios.ios_lldp_global:
         config:
           enabled: true
         state: merged
-    
+
     - name: Enable LLDP on interfaces
       cisco.ios.ios_lldp_interfaces:
         config:
