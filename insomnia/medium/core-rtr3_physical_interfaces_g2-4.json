@@ -1,0 +1,21 @@
+{
+	"Cisco-IOS-XE-ospfv3:ospfv3": {
+		"process-id": [
+			{
+				"<TODO>": <TODO>,
+				"<TODO>": {
+					"<TODO>": [
+						{
+							"id": <TODO>
+						}
+					]
+				}
+			}
+		],
+		"<TODO>": {
+			"point-to-point": [
+				null
+			]
+		}
+	}
+}

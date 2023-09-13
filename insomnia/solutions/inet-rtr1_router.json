@@ -1,0 +1,20 @@
+{
+	"Cisco-IOS-XE-ospfv3:ospfv3": [
+		{
+			"id": 1,
+			"address-family": {
+				"ipv6": {
+					"unicast": {
+						"default-information": {
+							"originate": {
+								"always": [
+									null
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	]
+}
