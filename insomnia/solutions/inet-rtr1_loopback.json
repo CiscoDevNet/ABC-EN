@@ -1,0 +1,16 @@
+{
+    "Cisco-IOS-XE-ospfv3:ospfv3": {
+    "process-id": [
+        {
+            "id": 1,
+            "ipv6": {
+                "area": [
+                    {
+                        "id": 0
+                    }
+                ]
+            }
+        }
+    ]
+  }
+}
