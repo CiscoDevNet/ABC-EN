@@ -1,0 +1,23 @@
+{
+	"Cisco-IOS-XE-ospfv3:ospfv3": [
+		{
+			"<TODO>": <TODO>,
+			"address-family": {
+				"<TODO>": {
+					"unicast": {
+						"area-config": [
+							{
+								"<TODO>": <TODO>,
+								"<TODO>": {
+									"no-summary": [
+										null
+									]
+								}
+							}
+						]
+					}
+				}
+			}
+		}
+	]
+}
