@@ -1,0 +1,20 @@
+{
+	"Cisco-IOS-XE-ospfv3:ospfv3": [
+		{
+			"id": <TODO>,
+			"address-family": {
+				"<TODO>": {
+					"<TODO>": {
+						"default-information": {
+							"<TODO>": {
+								"<TODO>": [
+									null
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	]
+}

@@ -1,0 +1,21 @@
+{
+	"Cisco-IOS-XE-ospfv3:ospfv3": {
+		"process-id": [
+			{
+				"id": <TODO>,
+				"ipv6": {
+					"area": [
+						{
+							"id": <TODO>
+						}
+					]
+				}
+			}
+		],
+		"network-type": {
+			"point-to-point": [
+				null
+			]
+		}
+	}
+}
