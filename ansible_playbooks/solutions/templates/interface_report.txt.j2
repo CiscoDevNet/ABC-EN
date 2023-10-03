@@ -1,0 +1,12 @@
+------------------------------------------------------------------
+Interface Test Results:
+{% for interface in host_interfaces %}
+{% set interface_name = interface | first  %}
+    {{ interface_name }}:
+        {{ "%-25s %32s" | format('Description', 'FAILED' if interface_description_test | json_query("results[?*." + interface_name + "].failed | [0]") else 'PASSED') }}
+        {{ "%-25s %32s" | format('Link local', 'FAILED' if interface_ipv6_link_local_test | json_query("results[?*." + interface_name + "].failed | [0]") else 'PASSED') }}
+        {{ "%-25s %32s" | format('IPv6 Address', 'FAILED' if interface_ipv6_address_test | json_query("results[?*." + interface_name + "].failed | [0]") else 'PASSED') }}
+{% if not loop.last %}
+
+{% endif %}
+{% endfor %}

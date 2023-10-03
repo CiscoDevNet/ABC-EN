@@ -1,0 +1,20 @@
+---
+- name: Gather Built-In Facts
+  hosts: all_routers
+  gather_facts: true
+  tasks:
+    - name: Display all built-in facts
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts }}"
+
+    - name: Display IOS version
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts.net_version }}"
+
+    - name: Gather IOS facts with the Cisco module
+      cisco.ios.ios_facts:
+        gather_subset: all
+
+    - name: Display Cisco IOS facts
+      ansible.builtin.debug:
+        var: ansible_facts

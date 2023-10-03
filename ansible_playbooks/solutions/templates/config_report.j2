@@ -1,0 +1,11 @@
+{% if 'config' in ansible_run_tags %}{% set all_tests=true %}{% else %}{% set all_tests=false %}{% endif -%}
+
+{% if 'services' in ansible_run_tags or all_tests %}{% include 'services_report.txt.j2' %}{% endif %}
+
+{% if 'ntp' in ansible_run_tags or all_tests %}{% include 'ntp_report.txt.j2' %}{% endif %}
+
+{% if 'lldp' in ansible_run_tags or all_tests %}{% include 'lldp_report.txt.j2' %}{% endif %}
+
+{% if 'interface' in ansible_run_tags or all_tests %}{% include 'interface_report.txt.j2' %}{% endif %}
+
+------------------------------------------------------------------

@@ -1,8 +1,19 @@
 ---
 all:
-  # <TODO>: Add hosts: definition
-    # <TODO> Add hosts
-      # <TODO> Add credentials
-    # <TODO> Create groups
-      # <TODO> Add Children
-      # <TODO> Add Vars
+  hosts:
+    inet-rtr1:
+      ansible_host: # <TODO> - Specify management address
+    inet-rtr2:
+      # <TODO> - Specify management address
+  children:
+    inet_routers:
+      hosts:
+        # <TODO> - Add routers to group
+    all_routers:
+      # <TODO> - Complete all_routers group definition
+      vars:
+        ansible_connection: # <TODO> - Specify connection method
+        ansible_network_os: # <TODO> - Specify Network OS for connection
+        ansible_network_cli_ssh_type: libssh
+        # <TODO> - Specify encrypted variable for username
+        # <TODO> - Specify encrypted variable for password

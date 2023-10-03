@@ -1,0 +1,19 @@
+---
+- name: Gather Built-In Facts
+  hosts: all_routers
+  gather_facts: true
+  tasks:
+    - name: Display all built-in facts
+      ansible.builtin.debug:
+        msg: # <TODO> - Specify variable to display
+
+    - name: Display IOS version
+      ansible.builtin.debug:
+        # <TODO> - Use dot notation to print IOS XE version
+
+    - name: Gather IOS facts with the Cisco module
+      cisco.ios.ios_facts:
+        gather_subset: # <TODO> - Specify facts to gather
+
+    - name: Display Cisco IOS facts
+      # <TODO> - Use an Ansible module to print the variable containing facts

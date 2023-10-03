@@ -1,7 +1,7 @@
 ---
 host_interfaces:
   - Loopback0:
-    # <TODO> Complete Loopback settings
+      # <TODO> - Define Loopback0 desired state
   - GigabitEthernet2:
       description: "To provider-rtr-2.g2"
       ipv6_address: "2001:db8:def:22::2/64"

@@ -1,8 +1,0 @@
----
-- name: Validate IOS Configuration changes
-  hosts: all_routers
-  gather_facts: false
-  tasks:
-    - name: Diff Against Startup
-      cisco.ios.ios_config:
-        diff_against: startup

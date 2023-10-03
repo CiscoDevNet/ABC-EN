@@ -1,0 +1,51 @@
+---
+- name: Validate device configuration
+  hosts: all_routers
+  gather_facts: false
+  tags:
+    - never
+    - config
+  tasks:
+    - name: Gather device facts
+      cisco.ios.ios_facts:
+        gather_subset: all
+      tags:
+        - always
+
+    - name: Validate NTP Configuration
+      ansible.builtin.include_tasks:
+        file: tests/validate_ntp.yml
+        apply:
+          tags:
+            - always
+      tags:
+        - ntp
+
+    - name: Validate LLDP Configuration
+      ansible.builtin.include_tasks:
+        file: tests/validate_lldp.yml
+        apply:
+          tags:
+            - always
+      tags:
+        - lldp
+
+    - name: Validate Interface Configuration
+      ansible.builtin.include_tasks:
+        file: tests/validate_interfaces.yml
+        apply:
+          tags:
+            - always
+      tags:
+        - interface
+
+    - name: Generate report
+      ansible.builtin.debug:
+        msg: "{{ report_text | split('\n') }}"
+      vars:
+        report_text: "{{ lookup('template', 'config_report.j2') }}"
+      tags:
+        - ntp
+        - lldp
+        - interface
+      failed_when: "'FAILED' in report_text"

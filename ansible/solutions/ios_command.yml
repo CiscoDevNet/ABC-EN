@@ -1,9 +1,0 @@
----
-- name: Copy Run Start
-  hosts: all_routers
-  gather_facts: false
-  tasks:
-    - name: Copy Run Start
-      cisco.ios.ios_command:
-        commands:
-          - command: write mem
