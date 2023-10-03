@@ -6,7 +6,7 @@ host_interfaces:
       link_local: "fe80::1"
       lldp: false
   - GigabitEthernet2:
-    # <TODO> Complete GigabitEthernet2 Settings
+      # <TODO> - Define GigabitEthernet2 desired state
   - GigabitEthernet3:
       description: "To inet-rtr2.g3"
       ipv6_address: "2001:db8:0:12::1/64"

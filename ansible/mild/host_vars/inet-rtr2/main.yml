@@ -1,5 +1,7 @@
 ---
 hostname: # <TODO> Add correct hostname
 ntp:
-  server: # <TODO> Add NTP Server
-  peer: # <TODO> Add NTP peer
+  servers:
+    - # <TODO> Add NTP Server
+  peers:
+    - # <TODO> Add NTP peer

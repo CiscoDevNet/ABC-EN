@@ -1,0 +1,47 @@
+---
+- name: Gather LLDP operational state
+  cisco.ios.ios_command:
+    commands:
+      - "show lldp"
+  register: lldp_state
+
+- name: Gather LLDP interface state
+  cisco.ios.ios_command:
+    commands:
+      - "show lldp interface"
+  register: lldp_interface_state_raw
+
+# noqa ignore-errors
+- name: LLDP Assertion Block
+  ignore_errors: true
+  block:
+    - name: Test global LLDP state
+      ansible.builtin.assert:
+        that:
+          - ops_line in (lldp_state | lower)
+        success_msg: "LLDP is running"
+        fail_msg: "LLDP is disabled on device"
+      register: lldp_run_test
+      vars:
+        ops_line: "status: active"
+
+    - name: Test interface LLDP state
+      ansible.builtin.assert:
+        that:
+          - ops_line in lldp_interface_state
+        success_msg: "LLDP enabled on interface '{{ interface_dict.key }}'"
+        fail_msg: "LLDP not enabled on interface '{{ interface_dict.key }}'"
+      register: lldp_interface_test
+      vars:
+        lldp_interface_state: "{{ lldp_interface_state_raw.stdout | first | replace(' ', '') }}"
+        interface_dict: "{{ lookup('ansible.builtin.dict', current_interface) }}"
+        ops_line: |
+          {{ interface_dict.key }}:
+          Tx:enabled
+          Rx:enabled
+      loop: "{{ host_interfaces }}"
+      loop_control:
+        loop_var: current_interface
+        label: "{{ interface_dict.key }}"
+      when:
+        - interface_dict.value.lldp | default(false)

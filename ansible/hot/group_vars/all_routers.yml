@@ -1,7 +1,0 @@
----
-services:
-# <TODO> Make a list of services and enable them
-# <TODO> Add restconf
-# <TODO> Add NTP, include a source
-# <TODO> Add netconf, include a list of features
-# <TODO> Add lldp

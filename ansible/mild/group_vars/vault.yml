@@ -1,3 +1,0 @@
----
-vault_ansible_user:  # <TODO> Set the username for IOS-XE devices
-vault_ansible_password:  # <TODO> Set the password for IOS-XE devices

@@ -1,0 +1,34 @@
+---
+- name: Configure NTP
+  hosts: all_routers
+  gather_facts: false
+  vars:
+    ntp_state: >-
+      {{ 'deleted' if not services.ntp.enabled | default(false) else 'merged' }}
+
+  tasks:
+    - name: Configure NTP Source Interface
+      cisco.ios.ios_ntp_global:
+        config:
+          source: "{{ services.ntp.source }}"
+        state: "{{ ntp_state }}"
+      when: services.ntp.source | default(false)
+
+    - name: Configure NTP Servers
+      cisco.ios.ios_ntp_global:
+        config:
+          servers:
+            - server: "{{ item | upper }}"
+        state: "{{ ntp_state }}"
+      loop: "{{ ntp.servers | default([]) }}"
+
+    - name: Configure NTP Peers
+      cisco.ios.ios_ntp_global:
+        config:
+          peers:
+            - peer: "{{ current_peer | upper }}"
+        state: "{{ ntp_state }}"
+      loop: "{{ ntp.peers | default([]) }}"
+      loop_control:
+        loop_var: current_peer
+        label: "Configuring peer '{{ current_peer }}'"

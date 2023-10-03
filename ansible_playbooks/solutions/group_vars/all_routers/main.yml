@@ -1,0 +1,14 @@
+---
+services:
+  restconf:
+    enabled: true
+  ntp:
+    source: Loopback0
+    enabled: true
+  netconf:
+    enabled: true
+    features:
+      - "candidate-datastore"
+      - "side-effect-sync"
+  lldp:
+    enabled: true

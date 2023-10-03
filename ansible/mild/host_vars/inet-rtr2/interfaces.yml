@@ -1,10 +1,10 @@
 ---
 host_interfaces:
   - Loopback0:
-      description: "Local Loopback"
-      ipv6_address: # <TODO> Set IPv6 Address
-      link_local: # <TODO> Set Link Local Address
-      lldp: false
+      description: # <TODO> - Specify interface description
+      ipv6_address: # <TODO> - Specify IPv6 address
+      link_local: # <TODO> - Specify link local address
+      lldp: # <TODO> - Define interface LLDP state
   - GigabitEthernet2:
       description: "To provider-rtr-2.g2"
       ipv6_address: "2001:db8:def:22::2/64"
