@@ -1,0 +1,29 @@
+---
+- name: Configure Interfaces
+  hosts: all_routers
+  gather_facts: false
+  tasks:
+    - name: Configure basic interface parameters
+      cisco.ios.ios_interfaces:
+        config:
+          - name: "{{ current_interface.key }}"
+            description: "{{ current_interface.value.description | default(omit) }}"
+            enabled: "{{ current_interface.value.enabled | default(true) }}"
+            mtu: "{{ current_interface.value.mtu | default(omit) }}"
+      loop: "{{ host_interfaces }}"
+      loop_control:
+        label: "{{ current_interface.key | default([]) }}"
+      vars:
+        current_interface: "{{ lookup('ansible.builtin.dict', item) }}"
+
+    - name: Configure interface IPv6 addresses
+      cisco.ios.ios_config:
+        lines:
+          - "ipv6 address {{ current_interface.value.ipv6_address | upper }}"
+          - "ipv6 address {{ current_interface.value.link_local | upper }} link-local"
+        parents: "interface {{ current_interface.key }}"
+      loop: "{{ host_interfaces | default([]) }}"
+      loop_control:
+        label: "{{ current_interface.key }}"
+      vars:
+        current_interface: "{{ lookup('ansible.builtin.dict', item) }}"

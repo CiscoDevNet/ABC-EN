@@ -1,0 +1,59 @@
+---
+- name: Get interface L3 config
+  cisco.ios.ios_l3_interfaces:
+    state: gathered
+  register: interface_l3_config
+
+- name: Interface test block
+  ignore_errors: true
+  block:
+    - name: Test interface description
+      ansible.builtin.assert:
+        that:
+          - desired_description == configured_description
+        success_msg: "Configured description matches desired"
+        fail_msg: |
+          Configured description '{{ configured_description }}'
+          does not match desired '{{ desired_description }}'
+      register: interface_description_test
+      loop: "{{ host_interfaces }}"
+      vars:
+        interface_name: "{{ item | first }}"
+        desired_description: "{{ item[interface_name].description }}"
+        configured_description: |
+          {{ ansible_facts.net_interfaces[interface_name].description }}
+      when:
+        - "'description' in item[interface_name]"
+
+    - name: Test link-local address
+      ansible.builtin.assert:
+        that:
+          - desired_address | upper == configured_address | upper
+      register: interface_ipv6_link_local_test
+      loop: "{{ host_interfaces }}"
+      vars:
+        interface_name: "{{ item | first }}"
+        desired_address: "{{ item[interface_name].link_local }}"
+        address_query: |
+          gathered[?name=='{{ item | first }}'][].ipv6[?link_local].address[] |
+          [0]
+        configured_address: |
+          {{ interface_l3_config | json_query(address_query) }}
+      when:
+        - "'link_local' in item[interface_name]"
+
+    - name: Test IPv6 address
+      ansible.builtin.assert:
+        that:
+          - desired_address | upper in configured_address | upper
+      register: interface_ipv6_address_test
+      loop: "{{ host_interfaces }}"
+      vars:
+        interface_name: "{{ item | first }}"
+        desired_address: "{{ item[interface_name].ipv6_address }}"
+        address_query: |
+          gathered[?name=='{{ item | first }}'][].ipv6[?!link_local].address[]
+        configured_address: |
+          {{ interface_l3_config | json_query(address_query) }}
+      when:
+        - "'ipv6_address' in item[interface_name]"

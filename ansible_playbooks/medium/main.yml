@@ -1,0 +1,11 @@
+---
+- name: Run service configuration playbook
+  ansible.builtin.import_playbook: # <TODO> - Specify the services playbook
+
+- name: Run LLDP configuration playbook
+  # <TODO> - Import the LLDP playbook
+
+- name: Run NTP configuration playbook
+  # <TODO> - Import the NTP playbook
+
+# <TODO> - Import the interfaces playbook

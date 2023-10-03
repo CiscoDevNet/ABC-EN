@@ -1,0 +1,13 @@
+------------------------------------------------------------------
+Service Test Results:
+    Global run state {{ "%45s" | format('FAILED' if lldp_run_test.failed else 'PASSED') }}
+
+    LLDP Interface State:
+{% for lldp_interface in lldp_interface_test.results %}
+{% set interface_name = (lldp_interface[lldp_interface.ansible_loop_var] | items | first)[0] %}
+{% if 'skipped' in lldp_interface and lldp_interface.skipped %}
+        {{ "%-25s %32s" | format(interface_name, 'SKIPPED') }}
+{% else %}
+        {{ "%-25s %32s" | format(interface_name, 'FAILED' if lldp_interface.failed else 'PASSED') }}
+{% endif %}
+{% endfor %}

@@ -1,0 +1,37 @@
+---
+- name: NTP Validation Block
+  ignore_errors: true
+  block:
+    - name: Test NTP Source Interface
+      ansible.builtin.assert:
+        that:
+          - config_line in ansible_facts.net_config
+        success_msg: |
+          NTP source '{{ services.ntp.source }}' present in running-config
+        fail_msg: |
+          NTP source '{{ services.ntp.source }}' not in running-config
+      vars:
+        config_line: "ntp source {{ services.ntp.source }}"
+      register: ntp_source_test
+
+    - name: Test NTP Servers
+      ansible.builtin.assert:
+        that:
+          - config_line in ansible_facts.net_config
+        success_msg: "NTP server '{{ item | upper }}' present in running-config"
+        fail_msg: "NTP server '{{ item | upper }}' not in running-config"
+      loop: "{{ ntp.servers }}"
+      vars:
+        config_line: "ntp server {{ item | upper }}"
+      register: ntp_server_test
+
+    - name: Verify NTP Peers
+      ansible.builtin.assert:
+        that:
+          - config_line in ansible_facts.net_config
+        success_msg: "NTP peer '{{ item | upper }}' present in running-config"
+        fail_msg: "NTP peer '{{ item | upper }}' not in running-config"
+      loop: "{{ ntp.peers }}"
+      vars:
+        config_line: "ntp peer {{ item | upper }}"
+      register: ntp_peer_test

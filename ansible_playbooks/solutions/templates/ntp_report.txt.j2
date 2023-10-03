@@ -1,0 +1,9 @@
+------------------------------------------------------------------
+NTP Test Results:
+    NTP source {{ "%-39s %11s" | format(services.ntp.source, 'FAILED' if ntp_source_test.failed else 'PASSED') }}
+{% for ntp_server in ntp_server_test.results %}
+    NTP server {{ "%-39s %11s" | format(ntp_server.item, 'FAILED' if ntp_server.failed else 'PASSED') }}
+{% endfor %}
+{% for ntp_peer in ntp_peer_test.results %}
+    NTP peer   {{ "%-39s %11s" | format(ntp_peer.item, 'FAILED' if ntp_peer.failed else 'PASSED') }}
+{% endfor %}

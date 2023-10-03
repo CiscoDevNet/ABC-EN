@@ -1,0 +1,12 @@
+---
+services:
+  restconf:
+    enabled: # <TODO> - Set RESTCONF state
+  ntp:
+    source: # <TODO> Set Loopback source
+  netconf:
+    enabled: # <TODO> Enabled true
+    features:
+      - # <TODO> - Add missing features
+  lldp:
+    enabled: true

@@ -1,0 +1,13 @@
+---
+services:
+  restconf:
+    enabled: # <TODO> - Set RESTCONF state
+  ntp:
+    source: # <TODO> Set Loopback source
+  netconf:
+    enabled: # <TODO> Enabled true
+    features:
+      - "candidate-datastore"
+      - # <TODO> - Add missing feature
+  lldp:
+    enabled: true

@@ -6,10 +6,10 @@ host_interfaces:
       link_local: "fe80::1"
       lldp: false
   - GigabitEthernet2:
-      description: # <TODO> Set Description
-      ipv6_address: "2001:db8:abc:11::1/64"
-      link_local: # <TODO> Set Link Local Address
-      lldp: true
+      description: # <TODO> - Specify interface description
+      ipv6_address: # <TODO> - Specify IPv6 address
+      link_local: # <TODO> - Specify link local address
+      lldp: # <TODO> - Define interface LLDP state
   - GigabitEthernet3:
       description: "To inet-rtr2.g3"
       ipv6_address: "2001:db8:0:12::1/64"

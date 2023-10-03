@@ -2,20 +2,20 @@
 all:
   hosts:
     inet-rtr1:
-      ansible_host: # <TODO> Add IP Address 
+      ansible_host: # <TODO> - Specify management address
     inet-rtr2:
-      ansible_host: # <TODO> Add IP Address 
+      ansible_host: # <TODO> - Specify management address
   children:
     inet_routers:
       hosts:
         inet-rtr1:
-        inet-rtr2:
+        # <TODO> - Add inet-rtr2 to group
     all_routers:
       children:
-        inet_routers:
+        # <TODO> - Add inet_routers to group
       vars:
         ansible_connection: ansible.netcommon.network_cli
-        ansible_network_os: cisco.ios.ios
+        ansible_network_os: # <TODO> - Specify Network OS for connection
         ansible_network_cli_ssh_type: libssh
-        ansible_user: "{{ vault_ansible_user }}"
-        ansible_password: "{{ vault_ansible_password }}"
+        ansible_user: # <TODO> - Specify encrypted variable for username
+        ansible_password: # <TODO> - Specify encrypted variable for password

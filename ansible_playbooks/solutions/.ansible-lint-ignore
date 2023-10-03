@@ -1,0 +1,4 @@
+tests/validate_interfaces.yml ignore-errors
+tests/validate_lldp.yml ignore-errors
+tests/validate_ntp.yml ignore-errors
+tests/validate_services.yml ignore-errors

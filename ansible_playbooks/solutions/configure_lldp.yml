@@ -1,0 +1,28 @@
+---
+- name: Configure LLDP
+  hosts: all_routers
+  gather_facts: false
+  vars:
+    lldp_state: >-
+      {{ 'deleted' if not services.lldp.enabled | default(false) else 'merged' }}
+
+  tasks:
+    - name: Enable LLDP Service
+      cisco.ios.ios_lldp_global:
+        config:
+          enabled: true
+        state: "{{ lldp_state }}"
+
+    - name: Enable LLDP on interfaces
+      cisco.ios.ios_lldp_interfaces:
+        config:
+          - name: "{{ interface_dict.key }}"
+            receive: true
+            transmit: true
+        state: "{{ interface_lldp_state }}"
+      loop: "{{ host_interfaces }}"
+      loop_control:
+        label: "{{ interface_dict.key }}"
+      vars:
+        interface_dict: "{{ lookup('ansible.builtin.dict', item) }}"
+        interface_lldp_state: "{{ 'deleted' if not interface_dict.value.lldp | default(false) else 'merged' }}"

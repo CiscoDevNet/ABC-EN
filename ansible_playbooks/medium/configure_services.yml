@@ -1,0 +1,47 @@
+---
+- name: Configure Services
+  hosts: all_routers
+  gather_facts: false
+  tasks:
+    - name: NETCONF task block
+      vars:
+        state_prefix: "{{ 'no' if not services.netconf.enabled | default(false) else '' }}"
+      block:
+        - name: Configure NETCONF service
+          cisco.ios.ios_config:
+            lines:
+              - # <TODO> - Enable the service
+            defaults: true
+
+        - name: Configure NETCONF features
+          cisco.ios.ios_config:
+            lines:
+              - "{{ state_prefix }} netconf-yang feature {{ item }}"
+            defaults: true
+          loop: # <TODO> - Specify variable containing features to loop
+          when: # <TODO> - Define when the configuration should be applied
+
+    - name: Configure RESTCONF services
+      cisco.ios.ios_config:
+        lines:
+          - "{{ state_prefix }} ip http secure-server"
+          - "{{ state_prefix }} restconf"
+        defaults: true
+      vars:
+        state_prefix: # <TODO> - Create a task variable to set the state prefix
+
+    - name: Get the full running configuration
+      cisco.ios.ios_command:
+        command: # <TODO> - Specify the command to run on each device
+      register: # <TODO> - Save output to a variable
+
+    - name: Test services
+      ansible.builtin.assert:
+        that:
+          - # <TODO> - Create test for ip http secure-server
+          - # <TODO> - Create test for RESTCONF service
+          - "'\nnetconf-yang\n' in device_running_config.stdout[0]"
+          - "'\nnetconf-yang feature side-effect-sync' in device_running_config.stdout[0]"
+          - "'\nnetconf-yang feature candidate-datastore' in device_running_config.stdout[0]"
+        success_msg: All services configured successfully
+        fail_msg: One or more services not present in running-config

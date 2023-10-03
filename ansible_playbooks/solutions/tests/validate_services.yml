@@ -1,0 +1,40 @@
+---
+- name: Get all NETCONF configuration
+  cisco.ios.ios_command:
+    commands: "show running-config all | include ^netconf|http|restconf"
+  register: device_netconf_config
+
+- name: Service assertion block
+  ignore_errors: true
+  block:
+    - name: Test global NETCONF state
+      ansible.builtin.assert:
+        that:
+          - "'netconf-yang\n' in device_netconf_config.stdout | first"
+        success_msg: "NETCONF is enabled"
+        fail_msg: "NETCONF is disabled"
+
+    - name: Test NETCONF features
+      ansible.builtin.assert:
+        that:
+          - ops_line in device_netconf_config.stdout | first
+        success_msg: "NETCONF feature '{{ item }}' is enabled"
+        fail_msg: "NETCONF feature '{{ item }}' is disabled"
+      loop: "{{ services.netconf.features | default([]) }}"
+      vars:
+        ops_line: "netconf-yang feature {{ item }}"
+
+    - name: Test HTTP secure-server is enabled
+      ansible.builtin.assert:
+        that:
+          # - "'ip http secure-server\n' in device_netconf_config.stdout | first"
+          - regex("^ip http secure-server$") in ansible_facts.net_config
+        success_msg: "HTTP secure server is enabled"
+        fail_msg: "HTTP secure server is not enabled"
+
+    - name: Test RESTCONF is globally enabled
+      ansible.builtin.assert:
+        that:
+          - "'restconf' in ansible_facts.net_config"
+        success_msg: "RESTCONF service is globally enabled"
+        fail_msg: "RESTCONF service is not globally enabled"
