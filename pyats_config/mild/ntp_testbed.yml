@@ -1,0 +1,16 @@
+---
+extends: # TODO_1 - specify the testbed to extend
+
+devices:
+  core-rtr3:
+    custom:
+      # TODO_2 - Create custom value for NTP source interface
+      ntp_servers:
+        - 2001:db8:0:255::1
+        - # TODO_3 - Ensure all NTP servers are added
+  core-rtr4:
+    custom:
+      ntp_source: Loopback0
+      ntp_servers:
+        - # TODO_4 - Add NTP servers for core-rtr4
+        -

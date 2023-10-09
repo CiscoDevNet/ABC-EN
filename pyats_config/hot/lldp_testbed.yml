@@ -1,0 +1,29 @@
+---
+extends: base_testbed.yml
+
+topology:
+  core-rtr3:
+    interfaces:
+      GigabitEthernet2:
+        lldp_enabled: true
+      GigabitEthernet3:
+        lldp_enabled: true
+      GigabitEthernet4:
+        lldp_enabled: true
+      GigabitEthernet5:
+        lldp_enabled: true
+      GigabitEthernet6:
+        lldp_enabled: true
+
+  core-rtr4:
+    interfaces:
+      GigabitEthernet2:
+        lldp_enabled: true
+      GigabitEthernet3:
+        lldp_enabled: true
+      GigabitEthernet4:
+        lldp_enabled: true
+      GigabitEthernet5:
+        lldp_enabled: true
+      GigabitEthernet6:
+        lldp_enabled: true

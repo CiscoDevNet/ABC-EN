@@ -1,0 +1,6 @@
+---
+extends:
+  - ../interface_testbed.yml
+  - ../lldp_testbed.yml
+  - ../ntp_testbed.yml
+  - ../base_testbed.yml

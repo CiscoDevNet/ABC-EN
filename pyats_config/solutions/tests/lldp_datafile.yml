@@ -1,0 +1,20 @@
+---
+testcases:
+  TestLldp:
+    parameters:
+      lldp_run:
+        core-rtr3: true
+        core-rtr4: true
+      lldp_interface:
+        core-rtr3:
+          GigabitEthernet2: true
+          GigabitEthernet3: true
+          GigabitEthernet4: true
+          GigabitEthernet5: true
+          GigabitEthernet6: true
+        core-rtr4:
+          GigabitEthernet2: true
+          GigabitEthernet3: true
+          GigabitEthernet4: true
+          GigabitEthernet5: true
+          GigabitEthernet6: true

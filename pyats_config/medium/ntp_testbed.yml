@@ -1,0 +1,16 @@
+---
+extends: base_testbed.yml
+
+devices:
+  core-rtr3:
+    custom:
+      ntp_source: Loopback0
+      ntp_servers:
+        - 2001:db8:0:255::1
+        - 2001:db8:0:255::2
+  core-rtr4:
+    custom:
+      ntp_source: Loopback0
+      ntp_servers:
+        - 2001:db8:0:255::1
+        - 2001:db8:0:255::2

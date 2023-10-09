@@ -1,0 +1,69 @@
+---
+devices:
+  core-rtr3:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::13
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+    custom:
+      abstraction:
+        order:
+          - os
+
+  core-rtr4:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::14
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+    custom:
+      abstraction:
+        order:
+          - os
+
+topology:
+  core-rtr3:
+    interfaces:
+      Loopback0:
+        type: ethernet
+        lldp_enabled: true
+      GigabitEthernet2:
+        type: ethernet
+      GigabitEthernet3:
+        type: ethernet
+      GigabitEthernet4:
+        type: ethernet
+      GigabitEthernet5:
+        type: ethernet
+      GigabitEthernet6:
+        type: ethernet
+
+  core-rtr4:
+    interfaces:
+      Loopback0:
+        type: ethernet
+      GigabitEthernet2:
+        type: ethernet
+      GigabitEthernet3:
+        type: ethernet
+      GigabitEthernet4:
+        type: ethernet
+      GigabitEthernet5:
+        type: ethernet
+      GigabitEthernet6:
+        type: ethernet

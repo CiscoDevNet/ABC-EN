@@ -1,0 +1,4 @@
+ntp source {{ ntp_source }}
+{% for ntp_server in ntp_servers %}
+ntp server {{ ntp_server }}
+{% endfor %}

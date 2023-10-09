@@ -1,0 +1,67 @@
+---
+extends: base_testbed.yml
+
+topology:
+  core-rtr3:
+    interfaces:
+      Loopback0:
+        description: Local Loopback
+        ipv6_link_local: fe80::3
+        ipv6: 2001:db8:0:100::3/128
+      GigabitEthernet2:
+        enabled: true
+        description: To inet-rtr1.g5
+        ipv6_link_local: fe80::3
+        ipv6: 2001:db8:0:13::3/64
+      GigabitEthernet3:
+        enabled: true
+        description: To inet-rtr2.g4
+        ipv6_link_local: fe80::3
+        ipv6: 2001:db8:0:23::3/64
+      GigabitEthernet4:
+        enabled: true
+        description: To core-rtr2.g4
+        ipv6_link_local: fe80::3
+        ipv6: 2001:db8:0:34::3/64
+      GigabitEthernet5:
+        enabled: true
+        description: To access-rtr2.g3
+        ipv6_link_local: fe80::3
+        ipv6: 2001:db8:0:36::3/64
+      GigabitEthernet6:
+        enabled: true
+        description: To access-rtr1.g2
+        ipv6_link_local: fe80::3
+        ipv6: 2001:db8:0:35::3/64
+
+  core-rtr4:
+    interfaces:
+      Loopback0:
+        description: Local Loopback
+        ipv6_link_local: fe80::4
+        ipv6: 2001:db8:0:100::4/128
+      GigabitEthernet2:
+        enabled: true
+        description: To inet-rtr2.g5
+        ipv6_link_local: fe80::4
+        ipv6: 2001:db8:0:24::4/64
+      GigabitEthernet3:
+        enabled: true
+        description: To inet-rtr1.g4
+        ipv6_link_local: fe80::4
+        ipv6: 2001:db8:0:14::4/64
+      GigabitEthernet4:
+        enabled: true
+        description: To core-rtr1.g4
+        ipv6_link_local: fe80::4
+        ipv6: 2001:db8:0:34::4/64
+      GigabitEthernet5:
+        enabled: true
+        description: To access-rtr1.g3
+        ipv6_link_local: fe80::4
+        ipv6: 2001:db8:0:45::4/64
+      GigabitEthernet6:
+        enabled: true
+        description: To access-rtr2.g2
+        ipv6_link_local: fe80::4
+        ipv6: 2001:db8:0:46::4/64
