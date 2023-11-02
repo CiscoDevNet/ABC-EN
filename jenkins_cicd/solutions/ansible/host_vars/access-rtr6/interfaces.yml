@@ -1,0 +1,28 @@
+---
+host_interfaces:
+  - Loopback0:
+      description: Local Loopback
+      ipv6_address: 2001:db8:0:255::6/128
+      link_local: fe80::6
+      lldp: false
+      ospfv3:
+        process_id: 1
+        area_id: 1
+  - GigabitEthernet2:
+      description: To core-rtr4.g6
+      ipv6_address: 2001:db8:0:46::6/64
+      link_local: fe80::6
+      lldp: true
+      ospfv3:
+        process_id: 1
+        area_id: 1
+        network_type: point-to-point
+  - GigabitEthernet3:
+      description: To core-rtr3.g5
+      ipv6_address: 2001:db8:0:36::6/64
+      link_local: fe80::6
+      lldp: true
+      ospfv3:
+        process_id: 1
+        area_id: 1
+        network_type: point-to-point

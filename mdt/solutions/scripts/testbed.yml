@@ -1,0 +1,35 @@
+---
+devices:
+  inet-rtr1:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 10.10.20.60
+#        ip: 2001:db8:c15:c0::11
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+    custom:
+      ping_target: 2001:db8:1111:1::1
+
+  inet-rtr2:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 10.10.20.54
+#        ip: 2001:db8:c15:c0::12
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!
+    custom:
+      ping_target: 2001:db8:2222:2::2

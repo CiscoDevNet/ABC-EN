@@ -1,0 +1,33 @@
+---
+- name: Configure streaming telemetry
+  hosts: all_routers
+
+  tasks:
+    - name: Configure named telemetry receivers
+      cisco.ios.ios_config:
+        lines:
+          - "host {{ item.address_type }} {{ item.address }} {{ item.port }}"
+          - "protocol {{ item.protocol }}"
+        parents: "telemetry receiver protocol {{ item.name }}"
+      loop: "{{ telemetry.receivers | default([]) }}"
+      loop_control:
+        label: "{{ item.name }}"
+      when:
+        - telemetry
+
+    - name: Configure telemetry subscriptions
+      cisco.ios.ios_config:
+        lines:
+          - "encoding {{ item.encoding }}"
+          - "filter xpath {{ item.xpath }}"
+          - "{{ 'source-address ' + item.source_address if item.source_address is defined else '' }}"
+          - "{{ 'source-vrf ' + item.source_vrf if item.source_vrf is defined else '' }}"
+          - "stream {{ item.stream_type }}"
+          - "update-policy {{ item.update_policy }}"
+          - "receiver name {{ item.receiver }}"
+        parents: "telemetry ietf subscription {{ item.id }}"
+      loop: "{{ telemetry.subscriptions | default([]) }}"
+      loop_control:
+        label: "{{ item.id }}"
+      when:
+        - telemetry

@@ -1,0 +1,30 @@
+---
+services:
+  restconf:
+    enabled: true
+  ntp:
+    enabled: true
+    source: Loopback0
+  netconf:
+    enabled: true
+    features:
+      - "candidate-datastore"
+      - "side-effect-sync"
+  lldp:
+    enabled: true
+
+telemetry:
+  receivers:
+    - name: telegraf
+      address_type: ip-address
+      address: 2001:db8:c15:c0::103
+      port: 57000
+      protocol: grpc-tcp
+  subscriptions:
+    - id: 11
+      encoding: encode-kvgpb
+      xpath: /interfaces-ios-xe-oper:interfaces/interface/statistics
+      source_vrf: Mgmt-vrf
+      stream_type: yang-push
+      update_policy: periodic 500
+      receiver: telegraf

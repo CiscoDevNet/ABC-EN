@@ -1,0 +1,4 @@
+---
+extends:
+  - access-rtr6.testbed.yml
+  - access-rtr5.testbed.yml

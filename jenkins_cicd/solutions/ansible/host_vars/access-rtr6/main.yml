@@ -1,0 +1,13 @@
+---
+hostname: access-rtr6
+ntp:
+  servers:
+    - 2001:db8:0:255::3
+    - 2001:db8:0:255::4
+ospfv3:
+  process_id: 1
+  router_id: 0.0.0.6
+  areas:
+    - area_id: 1
+      stub:
+        set: true

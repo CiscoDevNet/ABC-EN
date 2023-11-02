@@ -1,0 +1,223 @@
+// --------------------------------------------------------------------------
+// BEGIN VARIABLE DEFINITIONS - DO NOT CHANGE
+//
+// The runner image has been pre-built for this lab and includes the tools
+// necessary for testing and deployment.
+def RUNNER_IMAGE = 'jenkins-runner-pyats-ansible'
+
+// If additional Docker args are needed, such as static host definitions,
+// add them here.
+// def DOCKER_ARGS = "--add-host inet-rtr1:2001:db8:c15:c0::11"
+
+pipeline {
+    agent {
+        docker {
+            image "${RUNNER_IMAGE}"
+
+            // Uncomment below if additional args were defined
+            // args "${DOCKER_ARGS}"
+            reuseNode true
+        }
+    }
+
+    options {
+        /*
+        ** Do not immediately grab code from the repository when launched.
+        ** This is required for the initial workspace cleanup task. Otherwise,
+        ** Jenkins will checkout the code from GitLab and subsequently delete
+        ** it.
+        */
+        skipDefaultCheckout(true)
+
+        // Define the GitLab connection for stage progress reporting.
+        gitLabConnection('GitLab')
+
+        // Pre-define the stages that will be reported to GitLab. These do not
+        // need to match the stage names, but it makes it easier to correlate
+        // in the GitLab pipeline view.
+        gitlabBuilds(builds: ['Build',
+                              'Test',
+                              'Pre-change snapshot and testing',
+                              'Deploy',
+                              'Post-change snapshot and testing'])
+    }
+
+    environment {
+        // Set common environment variables
+        ANSIBLE_ASK_VAULT_PASS = 'false'
+        ANSIBLE_VAULT_PASSWORD_FILE = 'secrets.txt'
+        ANSIBLE_PLAYBOOK = 'main.yml'
+
+        // Test inventory is not used in this lab, but is an example of how a
+        // different inventory file can be used for a testing environment (for
+        // example, a digital twin)
+        ANSIBLE_TEST_INVENTORY = 'inventory-test.yml'
+    }
+
+    stages {
+        stage('Prepare Workspace') {
+            steps {
+                echo "Cleaning workspace files..."
+                cleanWs()
+
+                echo "Checking project out from GitLab..."
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // GitLab Pipeline status wrapper. The final result of each
+                // stage (pass/fail) will be sent to GitLab using the defined
+                // name.
+                gitlabCommitStatus(name: 'Build') {
+
+                    // Change working directory to "./ansible" in the runner
+                    dir('ansible') {
+                        script {
+                            if (fileExists('requirements.txt')) {
+                                echo "Installing additional Python packages..."
+                                // Uncomment for production use...
+                                // sh "pip install -r requirements.txt"
+                            }
+
+                            if (fileExists('requirements.yml')) {
+                                echo "Installing Ansible roles and modules..."
+                                // Uncomment for production use...
+                                // sh "ansible-galaxy install -r requirements.yml"
+                            }
+                        }
+
+                        echo "Creating Ansible vault secret file..."
+                        withCredentials([string(
+                            credentialsId: 'ANSIBLE_VAULT_SECRET',
+                            variable: 'VAULT_CREDS')]) {
+                                writeFile (file: ANSIBLE_VAULT_PASSWORD_FILE,
+                                    text: env.VAULT_CREDS)
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                gitlabCommitStatus(name: 'Test') {
+                    dir('pyats') {
+                        echo "Display all files to be linted..."
+                        sh "yamllint --list-files ./"
+
+                        echo "Running yamllint on all files..."
+                        sh "yamllint ./"
+
+                        echo "Validating pyATS testbed..."
+                        sh "pyats validate testbed \
+                            --testbed-file testbeds/all_devices.testbed.yml"
+
+                    }
+
+                    dir('ansible') {
+                        echo "Display all files to be linted..."
+                        sh "yamllint --list-files ./"
+
+                        echo "Running yamllint on all files..."
+                        sh "yamllint ./"
+
+                        echo "Linting Ansible playbook..."
+                        sh "ansible-lint ${ANSIBLE_PLAYBOOK}"
+
+                        echo "Running Ansible playbook in check mode..."
+                        sh "ansible-playbook --check ${ANSIBLE_PLAYBOOK}"
+                    }
+
+                    input(message: "All tests successful. Proceed with deployment?")
+                }
+            }
+        }
+
+        stage('Pre-change snapshot and testing') {
+            steps {
+                gitlabCommitStatus(name: 'Pre-change snapshot and testing') {
+                    dir('pyats') {
+                        echo "Taking pre-change snapshot of devices..."
+                        sh 'pyats learn config \
+                            --testbed-file testbeds/all_devices.testbed.yml \
+                            --output pre_snapshots'
+
+                        echo "Running initial tests..."
+
+                        // The first test is expected to fail, but do not end
+                        // the job when it does. Any result from pyATS here
+                        // will be treated as a "SUCCESS".
+                        catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
+                            sh 'pyats run job job.py \
+                                --html-logs pre_change_test \
+                                --no-archive'
+                        }
+                    }
+                }
+            }
+        }
+
+
+        stage('Deploy') {
+            steps {
+                gitlabCommitStatus(name: 'Deploy') {
+                    dir('ansible') {
+                        echo "Running Ansible playbook..."
+                        sh "ansible-playbook ${ANSIBLE_PLAYBOOK}"
+                    }
+                }
+            }
+        }
+
+        stage('Post-change snapshot and testing') {
+            steps {
+                gitlabCommitStatus(name: 'Post-change snapshot and testing') {
+                    dir('pyats') {
+                        echo "Taking post-change snapshot of devices..."
+                        sh 'pyats learn config \
+                            --testbed-file testbeds/all_devices.testbed.yml \
+                            --output post_snapshots'
+
+                        echo "Generating diff of pre-change and post-change snapshots..."
+                        sh 'pyats diff pre_snapshots/ post_snapshots/ \
+                            --output snapshot_diff/'
+
+                        echo "Running final tests..."
+                        sh 'pyats run job job.py --html-logs post_change_test \
+                            --no-archive'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always{
+            echo "Archiving artifacts..."
+            archiveArtifacts(artifacts: 'pyats/pre_snapshots/*, \
+                                         pyats/pre_change_test/*, \
+                                         pyats/post_snapshots/*, \
+                                         pyats/post_change_test/*, \
+                                         pyats/snapshot_diff/*',
+                allowEmptyArchive: true)
+
+            echo "Job execution complete."
+        }
+        success {
+            echo "Job executed successfully!"
+        }
+        unsuccessful {
+            echo "Job execution status is failed, please check error logs"
+        }
+        cleanup {
+            echo "Performing post-job cleanup..."
+            cleanWs(cleanWhenNotBuilt: false,
+                    cleanWhenFailure: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true)
+        }
+    }
+}

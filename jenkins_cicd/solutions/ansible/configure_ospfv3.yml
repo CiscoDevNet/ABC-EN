@@ -1,0 +1,30 @@
+---
+- name: Configure OSPFv3
+  hosts: all_routers
+
+  tasks:
+    - name: Configure OSPFv3 Process
+      cisco.ios.ios_ospfv3:
+        config:
+          processes:
+            - process_id: "{{ ospfv3.process_id }}"
+              router_id: "{{ ospfv3.router_id }}"
+              address_family:
+                - afi: ipv6
+                  unicast: true
+                  areas: "{{ ospfv3.areas }}"
+
+    - name: Configure OSPFv3 interfaces
+      cisco.ios.ios_config:
+        lines:
+          - "ospfv3 {{ current_interface.value.ospfv3.process_id }} ipv6 area {{ current_interface.value.ospfv3.area_id }}"
+          - "{{ if_net_type | default(omit) }}"
+        parents: "interface {{ current_interface.key }}"
+      loop: "{{ host_interfaces | default([]) }}"
+      loop_control:
+        label: "{{ current_interface.key }}"
+      vars:
+        current_interface: "{{ lookup('ansible.builtin.dict', item) }}"
+        if_net_type: >
+          {{ 'ospfv3 network ' + current_interface.value.ospfv3.network_type
+            if current_interface.value.ospfv3.network_type is defined else '' }}

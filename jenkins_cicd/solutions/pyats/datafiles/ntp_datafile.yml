@@ -1,0 +1,14 @@
+---
+testcases:
+  TestNtp:
+    parameters:
+      ntp_source:
+        access-rtr5: Loopback0
+        access-rtr6: Loopback0
+      ntp_servers:
+        access-rtr5:
+          - 2001:db8:0:255::3
+          - 2001:db8:0:255::4
+        access-rtr6:
+          - 2001:db8:0:255::3
+          - 2001:db8:0:255::4

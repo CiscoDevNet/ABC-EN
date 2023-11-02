@@ -1,0 +1,18 @@
+---
+- name: Run service configuration playbook
+  ansible.builtin.import_playbook: configure_services.yml
+
+- name: Run LLDP configuration playbook
+  ansible.builtin.import_playbook: configure_lldp.yml
+
+- name: Run NTP configuration playbook
+  ansible.builtin.import_playbook: configure_ntp.yml
+
+- name: Run interface configuration playbook
+  ansible.builtin.import_playbook: configure_interfaces.yml
+
+- name: Run OSPFv3 configuration playbook
+  ansible.builtin.import_playbook: configure_ospfv3.yml
+
+- name: Run telemetry configuration playbook
+  ansible.builtin.import_playbook: configure_telemetry.yml

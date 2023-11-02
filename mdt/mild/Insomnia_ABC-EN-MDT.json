@@ -1,0 +1,417 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-09-23T19:40:07.154Z",
+  "__export_source": "insomnia.desktop.app:v2023.4.0",
+  "resources": [
+    {
+      "_id": "req_f124a326567a4acd9511f35ea67da49f",
+      "parentId": "fld_664c64e64bba4acda92dc983d64039f1",
+      "modified": 1695497585649,
+      "created": 1695497331915,
+      "url": "https://{{hostname}}/restconf/data/ietf-event-notifications:subscription-config",
+      "name": "Get subscription config",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_2e1d34ad9a0e43f6a44153b81e97befb",
+          "name": "Accept",
+          "value": "application/yang-data+json",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "basic",
+        "useISO88591": false,
+        "disabled": false,
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "metaSortKey": -1695497331915,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_664c64e64bba4acda92dc983d64039f1",
+      "parentId": "fld_97e9496591ac4d089665c00bb01cde87",
+      "modified": 1695497649363,
+      "created": 1695497580263,
+      "name": "Get configuration",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1695497580263,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_97e9496591ac4d089665c00bb01cde87",
+      "parentId": "wrk_f6f6b4470cc9479094fbb7a76a9c80ed",
+      "modified": 1695497208075,
+      "created": 1695497208075,
+      "name": "Config",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1695497208075,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_f6f6b4470cc9479094fbb7a76a9c80ed",
+      "parentId": null,
+      "modified": 1695497940267,
+      "created": 1695495412924,
+      "name": "ABC-EN-MDT",
+      "description": "Model-Driven Telemetry collection for Enterprise Networking Automation Bootcamp",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_c6a701f5aae7424886e2b9494b2a0c0d",
+      "parentId": "fld_664c64e64bba4acda92dc983d64039f1",
+      "modified": 1695497615206,
+      "created": 1695497394836,
+      "url": "https://{{hostname}}/restconf/data/ietf-event-notifications:subscription-config/subscription=11",
+      "name": "Get traffic subscription config",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_2e1d34ad9a0e43f6a44153b81e97befb",
+          "name": "Accept",
+          "value": "application/yang-data+json",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "basic",
+        "useISO88591": false,
+        "disabled": false,
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "metaSortKey": -1695497331890,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_1dd3bd4132b44b0097790e5277395a27",
+      "parentId": "fld_664c64e64bba4acda92dc983d64039f1",
+      "modified": 1695497613230,
+      "created": 1695497385259,
+      "url": "https://{{hostname}}/restconf/data/ietf-event-notifications:subscription-config/subscription=10",
+      "name": "Get BGP subscription config",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_2e1d34ad9a0e43f6a44153b81e97befb",
+          "name": "Accept",
+          "value": "application/yang-data+json",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "basic",
+        "useISO88591": false,
+        "disabled": false,
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "metaSortKey": -1695497331865,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_96fe1444427e46f09729030db1245f7a",
+      "parentId": "fld_910e646f56624b45bedbd1cad783ca63",
+      "modified": 1695497679605,
+      "created": 1695497449213,
+      "url": "https://{{hostname}}/restconf/data/ietf-event-notifications:subscription-config/subscription=10",
+      "name": "Create BGP subscription",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"subscription\": [\n\t\t{\n\t\t\t\"subscription-id\": 10,\n\t\t\t\"stream\": \"ietf-yang-push:yang-push\",\n\t\t\t\"encoding\": \"cisco-xe-ietf-yang-push-ext:encode-kvgpb\",\n\t\t\t\"ietf-yang-push:xpath-filter\": \"/oc-netinst:network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state\",\n\t\t\t\"receivers\": {\n\t\t\t\t\"receiver\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"address\": \"2001:db8:c15:c0::103\",\n\t\t\t\t\t\t\"port\": 57000,\n\t\t\t\t\t\t\"protocol\": \"cisco-xe-ietf-yang-push-ext:grpc-tcp\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"source-vrf\": \"Mgmt-vrf\",\n\t\t\t\"source-address\": \"2001:db8:c15:c0::11\",\n\t\t\t\"ietf-yang-push:period\": 500\n\t\t}\n\t]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_2e1d34ad9a0e43f6a44153b81e97befb",
+          "name": "Accept",
+          "value": "application/yang-data+json",
+          "description": ""
+        },
+        {
+          "id": "pair_fdd2ca62b58c41b6947611f3b6e73b85",
+          "name": "Content-Type",
+          "value": "application/yang-data+json",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "basic",
+        "useISO88591": false,
+        "disabled": false,
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "metaSortKey": -1695497635827.4844,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_910e646f56624b45bedbd1cad783ca63",
+      "parentId": "fld_97e9496591ac4d089665c00bb01cde87",
+      "modified": 1695497733805,
+      "created": 1695497636265,
+      "name": "Create configuration",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1695497580213,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_d336e68815bc4b738d1ce81afee91a10",
+      "parentId": "fld_910e646f56624b45bedbd1cad783ca63",
+      "modified": 1695497683754,
+      "created": 1695497537804,
+      "url": "https://{{hostname}}/restconf/data/ietf-event-notifications:subscription-config/subscription=11",
+      "name": "Create interface subscription",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"subscription\": [\n\t\t{\n\t\t\t\"subscription-id\": 11,\n\t\t\t\"stream\": \"ietf-yang-push:yang-push\",\n\t\t\t\"encoding\": \"cisco-xe-ietf-yang-push-ext:encode-kvgpb\",\n\t\t\t\"ietf-yang-push:xpath-filter\": \"/oc-if:interfaces/interface/state/counters\",\n\t\t\t\"receivers\": {\n\t\t\t\t\"receiver\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"address\": \"2001:db8:c15:c0::103\",\n\t\t\t\t\t\t\"port\": 57000,\n\t\t\t\t\t\t\"protocol\": \"cisco-xe-ietf-yang-push-ext:grpc-tcp\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"source-vrf\": \"Mgmt-vrf\",\n\t\t\t\"source-address\": \"2001:db8:c15:c0::11\",\n\t\t\t\"ietf-yang-push:period\": 500\n\t\t}\n\t]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_2e1d34ad9a0e43f6a44153b81e97befb",
+          "name": "Accept",
+          "value": "application/yang-data+json",
+          "description": ""
+        },
+        {
+          "id": "pair_fdd2ca62b58c41b6947611f3b6e73b85",
+          "name": "Content-Type",
+          "value": "application/yang-data+json",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "basic",
+        "useISO88591": false,
+        "disabled": false,
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "metaSortKey": -1695497635777.4844,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_afe3c5c696ae4e55bbc989c705ab1e12",
+      "parentId": "fld_de05e81703bd4ca5acfc9985adf1f5c0",
+      "modified": 1695497310077,
+      "created": 1695497229628,
+      "url": "https://{{hostname}}/restconf/data/ietf-event-notifications:subscriptions",
+      "name": "Get telemetry oper state",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_e6bc789ff0234c55926015b8568bd9f7",
+          "name": "Accept",
+          "value": "application/yang-data+json",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "basic",
+        "useISO88591": false,
+        "disabled": false,
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "metaSortKey": -1695497229628,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_de05e81703bd4ca5acfc9985adf1f5c0",
+      "parentId": "wrk_f6f6b4470cc9479094fbb7a76a9c80ed",
+      "modified": 1695497203063,
+      "created": 1695497203063,
+      "name": "Operations",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1695497203063,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_b875f578fe244224bf2974086cca2d59",
+      "parentId": "fld_de05e81703bd4ca5acfc9985adf1f5c0",
+      "modified": 1695497703064,
+      "created": 1695497697300,
+      "url": "https://{{hostname}}/restconf/data/ietf-event-notifications:subscriptions/subscription=10",
+      "name": "Get BGP telemetry oper state",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_e6bc789ff0234c55926015b8568bd9f7",
+          "name": "Accept",
+          "value": "application/yang-data+json",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "basic",
+        "useISO88591": false,
+        "disabled": false,
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "metaSortKey": -1695447984618.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d92bc2383d464d3f83f8068feebbe91f",
+      "parentId": "fld_de05e81703bd4ca5acfc9985adf1f5c0",
+      "modified": 1695497716338,
+      "created": 1695497714297,
+      "url": "https://{{hostname}}/restconf/data/ietf-event-notifications:subscriptions/subscription=11",
+      "name": "Get interface telemetry oper state",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_e6bc789ff0234c55926015b8568bd9f7",
+          "name": "Accept",
+          "value": "application/yang-data+json",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "basic",
+        "useISO88591": false,
+        "disabled": false,
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "metaSortKey": -1695423362113.75,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_5619a45a5d39e190bd8a163960d9acbb1e2b5336",
+      "parentId": "wrk_f6f6b4470cc9479094fbb7a76a9c80ed",
+      "modified": 1695495412929,
+      "created": 1695495412929,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1695495412929,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_5619a45a5d39e190bd8a163960d9acbb1e2b5336",
+      "parentId": "wrk_f6f6b4470cc9479094fbb7a76a9c80ed",
+      "modified": 1695495412932,
+      "created": 1695495412932,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "env_66935c3b1c9e4b28bf439f09fd174bb7",
+      "parentId": "env_5619a45a5d39e190bd8a163960d9acbb1e2b5336",
+      "modified": 1695495451016,
+      "created": 1695495422378,
+      "name": "ABC-EN-MDT",
+      "data": {
+        "hostname": "inet-rtr1",
+        "username": "developer",
+        "password": "1234QWer!"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "hostname",
+          "username",
+          "password"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1695495422378,
+      "_type": "environment"
+    }
+  ]
+}
