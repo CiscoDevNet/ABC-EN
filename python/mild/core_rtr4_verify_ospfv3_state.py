@@ -1,13 +1,18 @@
-"""This script removes legacy OSPFv2 configuration"""
+"""This script validates the OSPFv3 state"""
 import requests
+import urllib3
 
-URL = "https://core-rtr4/restconf/data/Cisco-IOS-XE-native:native/router/"
+urllib3.disable_warnings()
+
+URL = "https://<TODO>/restconf/data/Cisco-IOS-XE-ospf-oper:ospf-oper-data/ospfv3-router"
+
+PAYLOAD = ""
 
 headers = {
     "accept": "application/yang-data+json"
 }
 
-response = requests.delete(URL,
+response = requests.<TODO>(url,
                            headers=headers,
                            auth=("developer", "1234QWer!"),
                            verify=False,

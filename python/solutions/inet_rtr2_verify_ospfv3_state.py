@@ -1,7 +1,12 @@
-"""This script gathers the current state of OSPF"""
+"""This script verifys the state of OSPFv3"""
 import requests
+import urllib3
 
-URL = "https://core-rtr4/restconf/data/Cisco-IOS-XE-native:native/router/"
+urllib3.disable_warnings()
+
+URL = "https://inet-rtr2:443/restconf/data/Cisco-IOS-XE-ospf-oper:ospf-oper-data/ospfv3-router"
+
+PAYLOAD = ""
 
 headers = {
     "accept": "application/yang-data+json"
