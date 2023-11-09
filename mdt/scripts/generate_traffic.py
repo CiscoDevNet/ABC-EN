@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-
+"""
+Start an IP SLA process to generate traffic from routers to the provider
+routers in the MDT lab.
+"""
 import argparse
-from connection_defs import devices
 from netmiko import ConnectHandler
+from connection_defs import devices
 
-traffic_time = 60  # seconds
+TRAFFIC_TIME = 60  # seconds
 
 config_commands = [
-    f"ip sla schedule 1 start-time now life {traffic_time}",
-    f"ip sla schedule 2 start-time now life {traffic_time}"
+    f"ip sla schedule 1 start-time now life {TRAFFIC_TIME}",
+    f"ip sla schedule 2 start-time now life {TRAFFIC_TIME}"
 ]
 
 if __name__ == "__main__":
@@ -35,7 +38,7 @@ if __name__ == "__main__":
                 print("\tOne or more IPSLA operations is not configured on the device.\n"
                       "\tVerify the configuration and retry")
             else:
-                print(f"\tOK - Traffic will be generated for {traffic_time} seconds.")
+                print(f"\tOK - Traffic will be generated for {TRAFFIC_TIME} seconds.")
 
         except KeyError:
             print(f"No connection defined for '{args.target_device}'. Verify device name and retry")

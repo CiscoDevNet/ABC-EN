@@ -1,0 +1,6 @@
+[MAIN]
+
+
+[MESSAGES CONTROL]
+disable=
+    duplicate-code

@@ -1,12 +1,27 @@
 """
-Sample pyATS Easypy job file for interface testing.
+Sample pyATS Easypy job file for ABC-EN-A-DDL CI/CD lab.
 
-Example:
-    pyats run job interface_job.py --testbed-file <your tb file>
+Copyright (c) 2023 Cisco and/or its affiliates.
 
-Arguments:
-    --testbed-file: Path and filename of the pyATS testbed file
+This software is licensed to you under the terms of the Cisco Sample
+Code License, Version 1.1 (the "License"). You may obtain a copy of the
+License at
+
+               https://developer.cisco.com/docs/licenses
+
+All use of the material herein must be in accordance with the terms of
+the License. All rights not expressly granted by the License are
+reserved. Unless required by applicable law or agreed to separately in
+writing, software distributed under the License is distributed on an "AS
+IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+or implied.
 """
+
+__author__ = "Palmer Sample <psample@cisco.com>"
+__copyright__ = "Copyright (c) 2023 Cisco and/or its affiliates."
+__license__ = "Cisco Sample Code License, Version 1.1"
+
+# pylint: disable=invalid-name
 import os
 import logging
 from pyats.easypy import run  # pylint: disable=no-name-in-module
@@ -15,23 +30,17 @@ from pyats.topology import loader
 logger = logging.getLogger(__name__)
 
 TESTBED_FILE = "all_devices.testbed.yml"
-DATAFILE = "combined_datafile.yml"
 TESTSCRIPT = "test_all.py"
 
 # Find the location of the script in relation to the job file
 root_path = os.path.dirname(os.path.abspath(__file__))
-datafile_path = os.path.join(root_path, "datafiles")
 testbed_path = os.path.join(root_path, "testbeds")
 test_path = os.path.join(root_path, "tests")
 
 # Define the testscript to execute
-# testscript = os.path.join(test_path, "test_device.py")
 TESTSCRIPT = os.path.join(test_path, TESTSCRIPT)
 
 TESTBED = loader.load(os.path.join(testbed_path, TESTBED_FILE))
-
-# Define the datafile containing expected test parameters
-DATAFILE = os.path.join(datafile_path, DATAFILE)
 
 
 def main(runtime):
@@ -53,5 +62,4 @@ def main(runtime):
     # Execute the testscript
     run(testbed=TESTBED,
         testscript=TESTSCRIPT,
-        datafile=DATAFILE,
         runtime=runtime)

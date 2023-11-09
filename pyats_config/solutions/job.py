@@ -1,12 +1,32 @@
 """
-Sample pyATS Easypy job file for interface testing.
+Sample pyATS Easypy job file with arguments to select the test(s)
+to execute.
 
 Example:
-    pyats run job interface_job.py --testbed-file <your tb file>
+    pyats run job job.py --lldp
 
-Arguments:
-    --testbed-file: Path and filename of the pyATS testbed file
+
+Copyright (c) 2023 Cisco and/or its affiliates.
+
+This software is licensed to you under the terms of the Cisco Sample
+Code License, Version 1.1 (the "License"). You may obtain a copy of the
+License at
+
+               https://developer.cisco.com/docs/licenses
+
+All use of the material herein must be in accordance with the terms of
+the License. All rights not expressly granted by the License are
+reserved. Unless required by applicable law or agreed to separately in
+writing, software distributed under the License is distributed on an "AS
+IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+or implied.
 """
+
+__author__ = "Palmer Sample <psample@cisco.com>"
+__copyright__ = "Copyright (c) 2023 Cisco and/or its affiliates."
+__license__ = "Cisco Sample Code License, Version 1.1"
+
+# pylint: disable=invalid-name
 import argparse
 import os
 import logging
@@ -18,23 +38,19 @@ logger = logging.getLogger(__name__)
 test_scripts = {
     "ntp": {
         "testbed": "ntp_testbed.yml",
-        "script": "test_ntp.py",
-        "datafile": "ntp_datafile.yml"
+        "script": "test_ntp.py"
     },
     "lldp": {
         "testbed": "lldp_testbed.yml",
-        "script": "test_lldp.py",
-        "datafile": "interface_datafile.yml"
+        "script": "test_lldp.py"
     },
     "interfaces": {
         "testbed": "interface_testbed.yml",
-        "script": "test_interfaces.py",
-        "datafile": "interface_datafile.yml"
+        "script": "test_interfaces.py"
     },
     "all": {
         "testbed": "tests/combined_testbed.yml",
-        "script": "test_all.py",
-        "datafile": "combined_datafile.yml"
+        "script": "test_all.py"
     }
 }
 
@@ -60,16 +76,12 @@ for arg in ("ntp", "lldp", "interfaces", "all"):
         break
 
 # Find the location of the script in relation to the job file
-test_path = os.path.dirname(os.path.abspath(__file__))
-test_path = os.path.join(test_path, "tests")
+base_path = os.path.dirname(os.path.abspath(__file__))
+test_path = os.path.join(base_path, "tests")
 
 # Define the testscript to execute
-# testscript = os.path.join(test_path, "test_device.py")
 testscript = os.path.join(test_path, test_script["script"])
-testbed = loader.load(test_script["testbed"])
-
-# Define the datafile containing expected test parameters
-datafile = os.path.join(test_path, test_script["datafile"])
+testbed = loader.load(os.path.join(base_path, test_script["testbed"]))
 
 
 def main(runtime):
@@ -82,7 +94,7 @@ def main(runtime):
     current runtime object in as an argument.  Includes information about the
     current execution environment, job name, other useful information.
 
-    :return: None (no return)
+    :return: None
     """
 
     # Change the default job name to something useful
@@ -91,5 +103,4 @@ def main(runtime):
     # Execute the testscript
     run(testbed=testbed,
         testscript=testscript,
-        datafile=datafile,
         runtime=runtime)

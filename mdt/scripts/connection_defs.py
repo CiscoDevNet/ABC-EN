@@ -1,3 +1,8 @@
+"""
+Connection definitions for each device in the lab. This will not be used
+during the DDL; supports scripts that must interact with the lab devices
+for purposes such as traffic generation.
+"""
 devices = {
     "inet-rtr1": {
         "device_type": "cisco_ios",

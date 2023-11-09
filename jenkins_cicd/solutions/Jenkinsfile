@@ -32,9 +32,11 @@ pipeline {
         // Define the GitLab connection for stage progress reporting.
         gitLabConnection('GitLab')
 
-        // Pre-define the stages that will be reported to GitLab. These do not
-        // need to match the stage names, but it makes it easier to correlate
-        // in the GitLab pipeline view.
+        /*
+        ** Pre-define the stages that will be reported to GitLab. These do not
+        ** need to match the stage names, but it makes it easier to correlate
+        ** in the GitLab pipeline view.
+        */
         gitlabBuilds(builds: ['Build',
                               'Test',
                               'Pre-change snapshot and testing',

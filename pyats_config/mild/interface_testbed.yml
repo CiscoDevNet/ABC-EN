@@ -12,21 +12,21 @@ topology:
         enabled: true
         description: To inet-rtr1.g5
         ipv6_link_local: fe80::3
-        ipv6:  # TODO - Specify interface IPv6 address/prefix
+        ipv6:  # <TODO> - Specify interface IPv6 address/prefix
       GigabitEthernet3:
         enabled: true
         description: To inet-rtr2.g4
         ipv6_link_local: fe80::3
-        ipv6:  # TODO - Specify interface IPv6 address/prefix
+        ipv6:  # <TODO> - Specify interface IPv6 address/prefix
       GigabitEthernet4:
-        enabled: true
+        enabled:  # <TODO> - Specify interface state
         description: To core-rtr2.g4
         ipv6_link_local: fe80::3
         ipv6: 2001:db8:0:34::3/64
       GigabitEthernet5:
         enabled: true
         description: To access-rtr2.g3
-        ipv6_link_local: fe80::3
+        ipv6_link_local:  # <TODO> - Define link local address
         ipv6: 2001:db8:0:36::3/64
       GigabitEthernet6:
         enabled: true

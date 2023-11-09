@@ -15,5 +15,5 @@ all:
         ansible_connection: # <TODO> - Specify connection method
         ansible_network_os: # <TODO> - Specify Network OS for connection
         ansible_network_cli_ssh_type: libssh
-        # <TODO> - Specify encrypted variable for username
-        # <TODO> - Specify encrypted variable for password
+        # <TODO> - Specify username using a variable from the vault
+        # <TODO> - Specify password using a variable from the vault

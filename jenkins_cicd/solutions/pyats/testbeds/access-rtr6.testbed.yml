@@ -30,6 +30,21 @@ devices:
           - area_id: 1
             stub:
               set: true
+      telemetry:
+        receivers:
+          - name: telegraf
+            address_type: ip-address
+            address: 2001:db8:c15:c0::103
+            port: 57000
+            protocol: grpc-tcp
+        subscriptions:
+          - id: 11
+            encoding: encode-kvgpb
+            xpath: /interfaces-ios-xe-oper:interfaces/interface/statistics
+            source_vrf: Mgmt-vrf
+            stream_type: yang-push
+            update_policy: periodic 500
+            receiver: telegraf
 
 topology:
   access-rtr6:

@@ -27,11 +27,12 @@ for device_name, device in testbed.devices.items():
 
         print("\t\tConfiguring link local address")
         if interface.ipv6_link_local:
-            device.api.config_link_local_ip_on_interface(interface=interface_name,
-                                                         ipv6_address=interface.ipv6_link_local)
+            device.api.XXX(interface=interface_name,  # <TODO_1> - replace XXX with an API for link local address
+                           ipv6_address=interface.ipv6_link_local)
 
         print("\t\tBuilding interface configuration")
-        interface.build_config(apply=True)
+        print(interface.XXX(apply=False))  # <TODO_2> - replace XXX with the proper method
+        # <TODO_3> - Change the above to apply config to the device.
 
     # Save the running config
     if SAVE_CONFIG:

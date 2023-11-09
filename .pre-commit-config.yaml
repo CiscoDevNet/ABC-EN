@@ -1,0 +1,49 @@
+---
+exclude: "^.*/(?:mild|medium|hot)/.*$"
+
+repos:
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.32.0
+    hooks:
+      - id: yamllint
+        args:
+          - "--strict"
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-json
+        name: JSON validity check
+        # Uncomment and un-indent below to enable JSON formatting.
+        # - id: pretty-format-json
+        #   name: Format JSON
+
+  - repo: https://github.com/PyCQA/pylint
+    rev: v3.0.2
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types:
+          - python
+
+  #  - repo: https://github.com/PyCQA/flake8
+  #    rev: 6.1.0
+  #    hooks:
+  #      - id: flake8
+  #        types:
+  #          - python
+
+  - repo: https://github.com/ansible-community/ansible-lint
+    rev: v6.21.1
+    hooks:
+      - id: ansible-lint
+        name: ansible-lint
+        args:
+          - "ansible/solutions/"
+          - "ansible_playbooks/solutions/"
+          - "jenkins_cicd/solutions/ansible/"
+        additional_dependencies:
+          - ansible-core >= 2.13.3
+          - jmespath ~= 1.0.1

@@ -1,0 +1,8 @@
+To import the datasource to a Grafana instance, use curl. Example:
+
+
+curl -X "POST" "http://grafana/api/datasources" \
+    -H "Content-Type: application/json" \
+    --user admin:admin \
+    --data-binary @Grafana_Datasource_Influxdb.json
+

@@ -38,6 +38,11 @@ ConfigureWithSnapshots:
                     - file_name: # <TODO> - Specify the pre-change snapshot filename
 
               # <TODO> - Configure each device
+              - configure:
+                  device: "%VARIABLES{current_device}"
+                  custom_substep_message: "Apply device configuration"
+                  command: |  # <TODO>: Complete the command list
+                    ip http secure-server
 
               # <TODO> - Create post-change snapshots
 

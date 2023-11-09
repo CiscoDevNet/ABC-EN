@@ -2,7 +2,7 @@
 extends: default
 
 ignore:
-  - group_vars/access_routers/vault.yml
+  - vault.yml
 
 rules:
   line-length:

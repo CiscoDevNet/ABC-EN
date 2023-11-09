@@ -4,18 +4,18 @@ extends: base_testbed.yml
 devices:
   core-rtr3:
     custom:
-      lldp_enabled:  # TODO - Enable LLDP on core-rtr3
+      lldp_enabled:  # <TODO> - Enable LLDP on core-rtr3
   core-rtr4:
     custom:
-      # TODO - Enable LLDP on core-rtr4
+      # <TODO> - Enable LLDP on core-rtr4
 
 topology:
   core-rtr3:
     interfaces:
       GigabitEthernet2:
-        lldp_enabled: # TODO - Enable LLDP for GigabitEthernet2
+        lldp_enabled: # <TODO> - Enable LLDP for GigabitEthernet2
       GigabitEthernet3:
-        # TODO - Enable LLDP for GigabitEthernet3
+        # <TODO> - Enable LLDP for GigabitEthernet3
       GigabitEthernet4:
         lldp_enabled: true
       GigabitEthernet5:

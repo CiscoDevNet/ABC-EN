@@ -15,18 +15,17 @@
       }
     ]
   },
-  "description": "Internet edge statistics",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+        "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
       },
       "fieldConfig": {
         "defaults": {
@@ -53,8 +52,8 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
-            "spanNulls": false,
+            "showPoints": "auto",
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -77,7 +76,7 @@
               }
             ]
           },
-          "unit": "binbps"
+          "unit": "Kbits"
         },
         "overrides": []
       },
@@ -87,14 +86,14 @@
         "x": 0,
         "y": 0
       },
-      "id": 4,
+      "id": 3,
       "options": {
         "legend": {
           "calcs": [
             "lastNotNull",
             "min",
-            "max",
-            "mean"
+            "mean",
+            "max"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -107,10 +106,10 @@
       },
       "targets": [
         {
-          "alias": "Internet Traffic - Ingress bps",
+          "alias": "Ingress from provider-rtr1",
           "datasource": {
             "type": "influxdb",
-            "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+            "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
           },
           "groupBy": [
             {
@@ -126,7 +125,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "openconfig-interfaces:interfaces/interface/state/counters",
+          "measurement": "Cisco-IOS-XE-interfaces-oper:interfaces/interface/statistics",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "A",
@@ -135,19 +134,13 @@
             [
               {
                 "params": [
-                  "in_octets"
+                  "rx_kbps"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
                 "type": "last"
-              },
-              {
-                "params": [
-                  "1s"
-                ],
-                "type": "non_negative_derivative"
               }
             ]
           ],
@@ -166,10 +159,10 @@
           ]
         },
         {
-          "alias": "Internet Traffic - Egress bps",
+          "alias": "Egress to provider-rtr1",
           "datasource": {
             "type": "influxdb",
-            "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+            "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
           },
           "groupBy": [
             {
@@ -186,30 +179,22 @@
             }
           ],
           "hide": false,
-          "measurement": "openconfig-interfaces:interfaces/interface/state/counters",
+          "measurement": "Cisco-IOS-XE-interfaces-oper:interfaces/interface/statistics",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT non_negative_derivative(last(\"out_octets\"), 10s) FROM \"autogen\".\"openconfig-interfaces:interfaces/interface/state/counters\" WHERE (\"name\"::tag = 'GigabitEthernet2') AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "out_octets"
+                  "tx_kbps"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
                 "type": "last"
-              },
-              {
-                "params": [
-                  "1s"
-                ],
-                "type": "non_negative_derivative"
               }
             ]
           ],
@@ -234,7 +219,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+        "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
       },
       "fieldConfig": {
         "defaults": {
@@ -261,8 +246,8 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
-            "spanNulls": false,
+            "showPoints": "auto",
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -285,7 +270,7 @@
               }
             ]
           },
-          "unit": "binbps"
+          "unit": "Kbits"
         },
         "overrides": []
       },
@@ -295,14 +280,14 @@
         "x": 12,
         "y": 0
       },
-      "id": 5,
+      "id": 4,
       "options": {
         "legend": {
           "calcs": [
             "lastNotNull",
             "min",
-            "max",
-            "mean"
+            "mean",
+            "max"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -315,10 +300,10 @@
       },
       "targets": [
         {
-          "alias": "Internet Traffic - Ingress bps",
+          "alias": "Ingress from provider-rtr2",
           "datasource": {
             "type": "influxdb",
-            "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+            "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
           },
           "groupBy": [
             {
@@ -334,7 +319,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "openconfig-interfaces:interfaces/interface/state/counters",
+          "measurement": "Cisco-IOS-XE-interfaces-oper:interfaces/interface/statistics",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "A",
@@ -343,19 +328,13 @@
             [
               {
                 "params": [
-                  "in_octets"
+                  "rx_kbps"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
                 "type": "last"
-              },
-              {
-                "params": [
-                  "1s"
-                ],
-                "type": "non_negative_derivative"
               }
             ]
           ],
@@ -374,10 +353,10 @@
           ]
         },
         {
-          "alias": "Internet Traffic - Egress bps",
+          "alias": "Egress to provider-rtr2",
           "datasource": {
             "type": "influxdb",
-            "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+            "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
           },
           "groupBy": [
             {
@@ -394,30 +373,22 @@
             }
           ],
           "hide": false,
-          "measurement": "openconfig-interfaces:interfaces/interface/state/counters",
+          "measurement": "Cisco-IOS-XE-interfaces-oper:interfaces/interface/statistics",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT non_negative_derivative(last(\"out_octets\"), 10s) FROM \"autogen\".\"openconfig-interfaces:interfaces/interface/state/counters\" WHERE (\"name\"::tag = 'GigabitEthernet2') AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "out_octets"
+                  "tx_kbps"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
                 "type": "last"
-              },
-              {
-                "params": [
-                  "1s"
-                ],
-                "type": "non_negative_derivative"
               }
             ]
           ],
@@ -442,7 +413,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+        "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
       },
       "fieldConfig": {
         "defaults": {
@@ -452,7 +423,7 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "Installed Routes",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -464,9 +435,6 @@
               "viz": false
             },
             "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -505,14 +473,14 @@
         "x": 0,
         "y": 8
       },
-      "id": 2,
+      "id": 1,
       "options": {
         "legend": {
           "calcs": [
             "lastNotNull",
             "min",
-            "max",
-            "mean"
+            "mean",
+            "max"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -525,10 +493,10 @@
       },
       "targets": [
         {
-          "alias": "iBGP - inet-rtr2",
+          "alias": "iBGP routes from inet-rtr2",
           "datasource": {
             "type": "influxdb",
-            "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+            "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
           },
           "groupBy": [
             {
@@ -544,18 +512,16 @@
               "type": "fill"
             }
           ],
-          "measurement": "openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state",
+          "measurement": "Cisco-IOS-XE-bgp-oper:bgp-state-data/neighbors/neighbor",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT last(\"prefixes/installed\") FROM \"autogen\".\"openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state\" WHERE (\"neighbor_address\"::tag = '2001:db8:0:255::2') AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "prefixes/installed"
+                  "installed_prefixes"
                 ],
                 "type": "field"
               },
@@ -567,17 +533,18 @@
           ],
           "tags": [
             {
-              "key": "neighbor_address::tag",
+              "condition": "AND",
+              "key": "neighbor_id::tag",
               "operator": "=",
-              "value": "2001:db8:0:255::2"
+              "value": "2001:DB8:0:255::2"
             }
           ]
         },
         {
-          "alias": "eBGP - provider-rtr1",
+          "alias": "eBGP routes from provider-rtr1",
           "datasource": {
             "type": "influxdb",
-            "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+            "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
           },
           "groupBy": [
             {
@@ -594,7 +561,7 @@
             }
           ],
           "hide": false,
-          "measurement": "openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state",
+          "measurement": "Cisco-IOS-XE-bgp-oper:bgp-state-data/neighbors/neighbor",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "B",
@@ -603,7 +570,7 @@
             [
               {
                 "params": [
-                  "prefixes/installed"
+                  "installed_prefixes"
                 ],
                 "type": "field"
               },
@@ -615,20 +582,21 @@
           ],
           "tags": [
             {
-              "key": "neighbor_address::tag",
+              "condition": "AND",
+              "key": "neighbor_id::tag",
               "operator": "=",
-              "value": "2001:db8:abc:11::ffff"
+              "value": "2001:DB8:ABC:11::FFFF"
             }
           ]
         }
       ],
-      "title": "BGP Routes - inet-rtr1",
+      "title": "inet-rtr1 - BGP Installed Prefixes",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+        "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
       },
       "fieldConfig": {
         "defaults": {
@@ -638,7 +606,7 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "Installed Routes",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -650,9 +618,6 @@
               "viz": false
             },
             "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -691,14 +656,14 @@
         "x": 12,
         "y": 8
       },
-      "id": 3,
+      "id": 2,
       "options": {
         "legend": {
           "calcs": [
             "lastNotNull",
             "min",
-            "max",
-            "mean"
+            "mean",
+            "max"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -711,10 +676,10 @@
       },
       "targets": [
         {
-          "alias": "iBGP - inet-rtr1",
+          "alias": "iBGP routes from inet-rtr1",
           "datasource": {
             "type": "influxdb",
-            "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+            "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
           },
           "groupBy": [
             {
@@ -730,18 +695,16 @@
               "type": "fill"
             }
           ],
-          "measurement": "openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state",
+          "measurement": "Cisco-IOS-XE-bgp-oper:bgp-state-data/neighbors/neighbor",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT last(\"prefixes/installed\") FROM \"autogen\".\"openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state\" WHERE (\"neighbor_address\"::tag = '2001:db8:0:255::2') AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "prefixes/installed"
+                  "installed_prefixes"
                 ],
                 "type": "field"
               },
@@ -753,17 +716,18 @@
           ],
           "tags": [
             {
-              "key": "neighbor_address::tag",
+              "condition": "AND",
+              "key": "neighbor_id::tag",
               "operator": "=",
-              "value": "2001:db8:0:255::1"
+              "value": "2001:DB8:0:255::1"
             }
           ]
         },
         {
-          "alias": "eBGP - provider-rtr2",
+          "alias": "eBGP routes from provider-rtr2",
           "datasource": {
             "type": "influxdb",
-            "uid": "bddc1c8b-b293-4da5-a6af-f7c97687b471"
+            "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4"
           },
           "groupBy": [
             {
@@ -780,7 +744,7 @@
             }
           ],
           "hide": false,
-          "measurement": "openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state",
+          "measurement": "Cisco-IOS-XE-bgp-oper:bgp-state-data/neighbors/neighbor",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "B",
@@ -789,7 +753,7 @@
             [
               {
                 "params": [
-                  "prefixes/installed"
+                  "installed_prefixes"
                 ],
                 "type": "field"
               },
@@ -801,14 +765,15 @@
           ],
           "tags": [
             {
-              "key": "neighbor_address::tag",
+              "condition": "AND",
+              "key": "neighbor_id::tag",
               "operator": "=",
-              "value": "2001:db8:def:22::ffff"
+              "value": "2001:DB8:DEF:22::FFFF"
             }
           ]
         }
       ],
-      "title": "BGP Routes - inet-rtr2",
+      "title": "inet-rtr2 - BGP Installed Prefixes",
       "type": "timeseries"
     }
   ],
@@ -825,8 +790,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Internet Edge Stats",
-  "uid": "b039b662-50c3-40c4-a678-8a253db50f31",
-  "version": 16,
+  "title": "Internet Edge Telemetry",
+  "uid": "fbb89727-cb5a-47eb-88ca-8762a680c5a9",
+  "version": 14,
   "weekStart": ""
 }

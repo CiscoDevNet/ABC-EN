@@ -1,0 +1,20 @@
+{
+  "id": 2,
+  "uid": "bbfbde26-ec1a-4827-8abf-7c85e52e27b4",
+  "orgId": 1,
+  "name": "InfluxDB",
+  "type": "influxdb",
+  "typeName": "InfluxDB",
+  "typeLogoUrl": "public/app/plugins/datasource/influxdb/img/influxdb_logo.svg",
+  "access": "proxy",
+  "url": "http://influxdb:8086",
+  "user": "",
+  "database": "",
+  "basicAuth": false,
+  "isDefault": true,
+  "jsonData": {
+    "dbName": "mdt",
+    "httpHeaderName1": "Authorization"
+  },
+  "readOnly": false
+}

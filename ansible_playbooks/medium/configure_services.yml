@@ -32,7 +32,7 @@
 
     - name: Get the full running configuration
       cisco.ios.ios_command:
-        command: # <TODO> - Specify the command to run on each device
+        commands: # <TODO> - Specify the command to run on each device
       register: # <TODO> - Save output to a variable
 
     - name: Test services

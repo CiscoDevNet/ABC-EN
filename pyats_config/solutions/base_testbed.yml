@@ -9,6 +9,7 @@ devices:
       cli:
         protocol: ssh
         ip: 2001:db8:c15:c0::13
+        ssh_options: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
     credentials:
       default:
         username: developer
@@ -27,6 +28,7 @@ devices:
       cli:
         protocol: ssh
         ip: 2001:db8:c15:c0::14
+        ssh_options: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
     credentials:
       default:
         username: developer

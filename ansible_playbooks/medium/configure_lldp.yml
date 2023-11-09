@@ -3,7 +3,7 @@
   hosts: all_routers
   gather_facts: false
   vars:
-    lldp_state: |-
+    lldp_state: >-
       {{ 'deleted' if not services.lldp.enabled | default(false) else 'merged' }}
 
   tasks:

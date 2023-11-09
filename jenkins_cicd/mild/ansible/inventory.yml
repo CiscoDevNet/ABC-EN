@@ -1,0 +1,18 @@
+---
+all:
+  hosts:
+    access-rtr5:
+      ansible_host: 2001:db8:c15:c0::15
+    access-rtr6:
+      ansible_host: 2001:db8:c15:c0::16
+  children:
+    access_routers:
+      hosts:
+        access-rtr5:
+        access-rtr6:
+      vars:
+        ansible_connection: ansible.netcommon.network_cli
+        ansible_network_os: cisco.ios.ios
+        ansible_network_cli_ssh_type: libssh
+        ansible_user: "{{ vault_ansible_user }}"
+        ansible_password: "{{ vault_ansible_password }}"

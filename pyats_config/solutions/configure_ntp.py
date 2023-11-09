@@ -30,7 +30,7 @@ for device_name, device in testbed.devices.items():
                                    ntp_source=device.custom.ntp_source,
                                    ntp_servers=device.custom.ntp_servers)
 
-    # # Save the running config
+    # Save the running config
     if SAVE_CONFIG:
         device.api.save_running_config_configuration()
 

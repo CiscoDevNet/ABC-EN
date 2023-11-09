@@ -3,13 +3,14 @@
   hosts: all_routers
   gather_facts: false
   vars:
-    lldp_state: |-
+    lldp_state: >-
       {{ 'deleted' if not services.lldp.enabled | default(false) else 'merged' }}
 
   tasks:
     - name: Enable LLDP Service
       cisco.ios.ios_lldp_global:
-        # <TODO> - Specify LLDP global parameters
+        config:
+          enabled: # <TODO> - Specify LLDP global run state
         state: # <TODO> - Use a variable to define the desired state
 
     - name: Enable LLDP on interfaces

@@ -10,7 +10,7 @@ Steps:
 """
 from pyats.topology import loader
 
-TESTBED = ""  # TODO_1 - Specify the correct extended testbed for this job.
+TESTBED = ""  # <TODO_1> - Specify the correct extended testbed for this job.
 
 # Should the running-config be saved after configuration?
 SAVE_CONFIG = False
@@ -18,19 +18,20 @@ SAVE_CONFIG = False
 testbed = loader.load(TESTBED)
 
 print("Connecting to all devices in testbed...")
-testbed.  # TODO_2 - use the correct method to connect to all devices
+testbed.  # <TODO_2> - use the correct method to connect to all devices
 
 print("*" * 78)
 for device_name, device in testbed.devices.items():
     print(f"Configuring device '{device_name}'")
 
     print("\tConfiguring NTP using a template...")
-    device.api.TODO_3-replace_with_genie_api(templates_dir="",  # TODO_4 - specify templates directory
-                                   template_name="",  # TODO_5 - specify the Jinja2 template
-                                   ntp_source=device.custom.,  # TODO_6 - use a testbed custom attribute for NTP source
-                                   ntp_servers=device.custom.)  # TODO_7 - use a testbed custom attributes for NTP servers
+    # <TODO_3> - Replace below placeholder text with the correct Genie API
+    device.api.replace_with_genie_api(templates_dir="",  # <TODO_4> - specify templates directory
+                                      template_name="",  # <TODO_5> - specify the Jinja2 template
+                                      ntp_source=device.custom.REPLACE_THIS,  # <TODO_6> - use a testbed custom attribute for NTP source
+                                      ntp_servers=device.custom.REPLACE_THIS)  # <TODO_7> - use a testbed custom attributes for NTP servers
 
-    # # Save the running config
+    # Save the running config
     if SAVE_CONFIG:
         device.api.save_running_config_configuration()
 

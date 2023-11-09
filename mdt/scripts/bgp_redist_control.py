@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
-
+"""
+Control BGP prefix injection for MDT lab.
+"""
 import argparse
 from os.path import basename
-from connection_defs import providers as devices
 from netmiko import ConnectHandler
+from connection_defs import providers as devices
 
-redist_interface = "Loopback99"
+REDIST_INTERFACE = "Loopback99"
 
 if "inject" in basename(__file__):
-    loopback_command = "no shutdown"
-    task_type = "inject"
+    LOOPBACK_COMMAND = "no shutdown"
+    TASK_TYPE = "inject"
 else:
-    loopback_command = "shutdown"
-    task_type = "retract"
+    LOOPBACK_COMMAND = "shutdown"
+    TASK_TYPE = "retract"
 
 config_commands = [
-    f"interface {redist_interface}",
-    loopback_command
+    f"interface {REDIST_INTERFACE}",
+    LOOPBACK_COMMAND
 ]
 
 if __name__ == "__main__":
@@ -33,10 +35,10 @@ if __name__ == "__main__":
     for device in args.target_device:
         print()
         try:
-            print(f"{task_type.capitalize()} BGP prefixes from provider-rtr to '{device}'...")
+            print(f"{TASK_TYPE.capitalize()} BGP prefixes from provider-rtr to '{device}'...")
             ssh_conn = ConnectHandler(**devices[device])
             output = ssh_conn.send_config_set(config_commands)
-            print(f"\t{task_type.capitalize()} process complete.")
+            print(f"\t{TASK_TYPE.capitalize()} process complete.")
 
         except KeyError:
             print(f"No connection defined for '{args.target_device}'. Verify device name and retry")
