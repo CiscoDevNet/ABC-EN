@@ -1,6 +1,7 @@
+"""This script gathers the current state of OSPF"""
 <TODO IMPORT REQUIRED LIBARIES>
 
-url = <TODO>
+URL = <TODO>
 
 headers = {
     <TODO>
