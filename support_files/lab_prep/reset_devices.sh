@@ -63,6 +63,10 @@ PYTHON_BIN=${PYTHON_VENV}/bin/python
 PYTHON_PIP_BIN=${PYTHON_VENV}/bin/pip
 PYATS_BIN=${PYTHON_VENV}/bin/pyats
 
+# Even though a Python/pyATS binary is explicitly being called from the venv,
+# some tools are searching $PATH. Explicitly prepend the path here
+PATH=${PYTHON_VENV}/bin:${PATH}
+
 # Set the path that clean files should import to locate the SCP root
 # directory when performing full clean/reset ops.
 # NOTE: This path is listed here to be easily modified. Later in this script,

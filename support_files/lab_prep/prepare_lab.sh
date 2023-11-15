@@ -51,6 +51,10 @@ PYTHON_BIN=${PYTHON_VENV}/bin/python
 PYTHON_PIP_BIN=${PYTHON_VENV}/bin/pip
 PYATS_BIN=${PYTHON_VENV}/bin/pyats
 
+# Even though a Python/pyATS binary is explicitly being called from the venv,
+# some tools are searching $PATH. Explicitly prepend the path here
+PATH=${PYTHON_VENV}/bin:${PATH}
+
 # Set the galaxy bin. Test for presence later, along with a requirements.yml
 # file. If both exist, run the installer
 ANSIBLE_GALAXY_BIN=${PYTHON_VENV}/bin/ansible-galaxy
