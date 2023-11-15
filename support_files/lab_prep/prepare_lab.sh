@@ -112,9 +112,8 @@ echo "Installing additional Ansible roles and collections..."
 echo "******************************************************************************"
 echo
 
-if [ -x ${ANSIBLE_GALAXY_BIN} ]; then
-    [ -f ${LAB_GALAXY_REQUIREMENTS} ]] && \
-        ${ANSIBLE_GALAXY_BIN} install \
+if [ -x ${ANSIBLE_GALAXY_BIN} ] && [ -f ${LAB_GALAXY_REQUIREMENTS} ]; then
+    ${ANSIBLE_GALAXY_BIN} install \
         -r ${LAB_GALAXY_REQUIREMENTS} \
         2>&1 > ${LOG_PATH}/galaxy_repo_install.log.txt
 
