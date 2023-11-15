@@ -127,4 +127,5 @@ else
     echo "ERROR - Lab reset encontered problems. Check the logs for details."
     echo "******************************************************************************"
     echo
+    exit ${LAB_INIT_RESULT}
 fi

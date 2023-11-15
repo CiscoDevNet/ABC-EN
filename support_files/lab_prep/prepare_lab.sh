@@ -165,4 +165,5 @@ else
     echo "ERROR - Lab preparation encontered problems. Please contact your instructor."
     echo "******************************************************************************"
     echo
+    exit ${LAB_INIT_RESULT}
 fi
