@@ -1,0 +1,23 @@
+---
+cleaners:
+  PyatsDeviceClean:
+    module: genie.libs.clean
+    devices:
+      - provider-rtr1
+      - provider-rtr2
+      - inet-rtr1
+      - inet-rtr2
+      - core-rtr3
+      - core-rtr4
+      - access-rtr5
+      - access-rtr6
+
+extends:
+  - "%ENV{CLEAN_FILE_PATH}/access-rtr6.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/access-rtr5.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/core-rtr4.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/core-rtr3.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/inet-rtr2.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/inet-rtr1.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/provider-rtr2.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/provider-rtr1.clean.yml"

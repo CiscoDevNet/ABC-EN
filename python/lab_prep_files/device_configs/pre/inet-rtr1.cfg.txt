@@ -1,0 +1,115 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: ansible_playbooks/inet-rtr1
+!
+ip http secure-server
+restconf
+netconf-yang
+netconf-yang feature candidate-datastore
+netconf-yang feature side-effect-sync
+!
+lldp run
+!
+interface Loopback0
+ description Local Loopback
+ ipv6 address 2001:db8:0:255::1/128
+ ipv6 address fe80::1 link-local
+ no shutdown
+!
+interface GigabitEthernet2
+ description To provider-rtr-1.g2
+ ipv6 address 2001:db8:abc:11::1/64
+ ipv6 address fe80::1 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet3
+ description To inet-rtr2.g3
+ ipv6 address 2001:db8:0:12::1/64
+ ipv6 address fe80::1 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet4
+ description To core-rtr4.g3
+ ipv6 address 2001:db8:0:14::1/64
+ ipv6 address fe80::1 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet5
+ description To core-rtr3.g2
+ ipv6 address 2001:db8:0:13::1/64
+ ipv6 address fe80::1 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+ntp source Loopback0
+ntp server 2001:db8:abc:11::ffff
+ntp peer 2001:db8:0:255::2
+!
+! END Expected configuration result: ansible_playbooks/inet-rtr1
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: mdp/inet-rtr1
+!
+router bgp 65123
+ bgp router-id interface Loopback0
+ bgp log-neighbor-changes
+ no bgp default ipv4-unicast
+ neighbor 2001:DB8:0:255::2 remote-as 65123
+ neighbor 2001:DB8:0:255::2 description To inet-rtr2.Loopback0
+ neighbor 2001:DB8:0:255::2 update-source Loopback0
+ neighbor 2001:DB8:ABC:11::FFFF remote-as 64501
+ neighbor 2001:DB8:ABC:11::FFFF description To provider-rtr1
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+  network 2001:DB8:0:255::11/128
+  aggregate-address 2001:DB8::/48 summary-only
+  neighbor 2001:DB8:0:255::2 activate
+  neighbor 2001:DB8:0:255::2 next-hop-self
+  neighbor 2001:DB8:ABC:11::FFFF activate
+ exit-address-family
+!
+! END Expected configuration result: mdp/inet-rtr1
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: insomnia/inet-rtr1
+!
+no router ospf 100
+!
+!
+router ospfv3 1
+ address-family ipv6 unicast
+  default-information originate always
+ exit-address-family
+!
+interface Loopback0
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet3
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet4
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet5
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+! END Expected configuration result: insomnia/inet-rtr1
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

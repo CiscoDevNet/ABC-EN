@@ -1,0 +1,37 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: insomnia/core-rtr3
+!
+no router ospf 100
+!
+router ospfv3 1
+ address-family ipv6 unicast
+  area 1 stub no-summary
+ exit-address-family
+!
+interface Loopback0
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet2
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet3
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet4
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet5
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 1
+!
+interface GigabitEthernet6
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 1
+!
+! END Expected configuration result: insomnia/core-rtr3
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

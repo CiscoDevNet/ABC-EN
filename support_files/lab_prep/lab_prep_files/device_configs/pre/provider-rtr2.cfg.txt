@@ -1,0 +1,79 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: pre-lab/provider-rtr2
+!
+!
+ipv6 unicast-routing
+!
+class-map match-any ICMP-LIMIT
+ match protocol ipv6-icmp
+ match protocol icmp
+!
+policy-map ICMP-OUT
+ class ICMP-LIMIT
+  police 64000 conform-action transmit  exceed-action drop  violate-action drop
+ class class-default
+!
+interface Loopback0
+ description Local loopback
+ ip address 172.16.100.22 255.255.255.255
+ ipv6 address FE80::DEF:FFFF link-local
+ no shutdown
+!
+interface Loopback99
+ description Loopback for route injection
+ no ip address
+ shutdown
+ ipv6 address 2001:DB8:2222:2::2/64
+ ipv6 address 2001:DB8:2222:12::2/64
+ ipv6 address 2001:DB8:2222:22::2/64
+ ipv6 address 2001:DB8:2222:32::2/64
+ ipv6 address 2001:DB8:2222:42::2/64
+ ipv6 address 2001:DB8:2222:52::2/64
+ ipv6 address 2001:DB8:2222:62::2/64
+ ipv6 address 2001:DB8:2222:72::2/64
+ ipv6 address 2001:DB8:2222:82::2/64
+ ipv6 address 2001:DB8:2222:92::2/64
+!
+interface GigabitEthernet2
+ description To inet-rtr2.g2
+ no ip address
+ negotiation auto
+ ipv6 address FE80::DEF:FFFF link-local
+ ipv6 address 2001:DB8:DEF:22::FFFF/64
+ service-policy output ICMP-OUT
+ no shutdown
+!
+router bgp 64502
+ bgp router-id interface Loopback0
+ bgp log-neighbor-changes
+ no bgp default ipv4-unicast
+ neighbor 2001:DB8:DEF:22::2 remote-as 65123
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+  redistribute connected
+  neighbor 2001:DB8:DEF:22::2 activate
+  neighbor 2001:DB8:DEF:22::2 route-map RM-CUSTOMER-ONLY in
+ exit-address-family
+!
+ip http secure-server
+!
+ip as-path access-list 10 permit ^65123$
+!
+!
+route-map RM-CUSTOMER-ONLY permit 10
+ match as-path 10
+!
+!
+ntp master 1
+!
+netconf-yang
+netconf-yang feature candidate-datastore
+restconf
+!
+! END Expected configuration result: pre-lab/provider-rtr2
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

@@ -1,0 +1,30 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: insomnia/inet-rtr1
+!
+no router ospf 100
+!
+!
+router ospfv3 1
+ address-family ipv6 unicast
+  default-information originate always
+ exit-address-family
+!
+interface Loopback0
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet3
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet4
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet5
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+! END Expected configuration result: insomnia/inet-rtr1
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

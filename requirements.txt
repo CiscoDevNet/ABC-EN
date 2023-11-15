@@ -1,0 +1,30 @@
+#############################################################################
+# These packages are pre-installed into the student VM virtual environment.
+# To add packages or change versions, edit the requirements.txt file located
+# at:
+#     support_files/lab_prep_files/lab_prep_files/requirements.txt
+#
+# Packages defined in that file will be installed during initial system
+# boot.
+#############################################################################
+#
+# Core packages
+#
+pyats[full]==23.10
+rest.connector==23.10
+yang.connector==23.10
+ansible==8.6.1
+ansible-pylibssh==1.1.0
+ansible-lint==6.22.0
+netaddr==0.8.0
+jmespath==1.0.1
+requests==2.31.0
+requests-toolbelt==1.0.0
+#
+# Formatting, linting, and code tools
+#
+black==23.11.0
+flake8==6.1.0
+pycodestyle==2.11.1
+pylint==3.0.2
+yamllint==1.33.0

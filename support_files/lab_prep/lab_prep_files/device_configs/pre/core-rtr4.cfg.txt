@@ -1,0 +1,20 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: pre-lab/core-rtr4
+!
+!
+ipv6 unicast-routing
+!
+interface Loopback0
+ description Local Loopback
+ ip address 172.16.100.14 255.255.255.255
+!
+!
+router ospf 100
+ router-id 4.4.4.4
+ network 172.16.254.0 0.0.0.3 area 0
+!
+!
+! END Expected configuration result: pre-lab/core-rtr4
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

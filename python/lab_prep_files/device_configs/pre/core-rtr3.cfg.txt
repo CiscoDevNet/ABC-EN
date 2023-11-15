@@ -1,0 +1,109 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: pyats_testing/core-rtr3
+!
+ip http secure-server
+restconf
+netconf-yang
+netconf-yang feature candidate-datastore
+netconf-yang feature side-effect-sync
+!
+lldp run
+!
+! END Expected configuration result: pyats_testing/core-rtr3
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: pyats_config/core-rtr3
+!
+interface Loopback0
+ description Local Loopback
+ ipv6 address 2001:db8:0:255::3/128
+ ipv6 address fe80::3 link-local
+ no shutdown
+!
+interface GigabitEthernet2
+ description To inet-rtr1.g5
+ ipv6 address 2001:db8:0:13::3/64
+ ipv6 address fe80::3 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet3
+ description To inet-rtr2.g4
+ ipv6 address 2001:db8:0:23::3/64
+ ipv6 address fe80::3 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet4
+ description To core-rtr2.g4
+ ipv6 address 2001:db8:0:34::3/64
+ ipv6 address fe80::3 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet5
+ description To access-rtr2.g3
+ ipv6 address 2001:db8:0:36::3/64
+ ipv6 address fe80::3 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet6
+ description To access-rtr1.g2
+ ipv6 address 2001:db8:0:35::3/64
+ ipv6 address fe80::3 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+ntp source Loopback0
+ntp server 2001:db8:0:255::1
+ntp server 2001:db8:0:255::2
+!
+! END Expected configuration result: pyats_config/core-rtr3
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: insomnia/core-rtr3
+!
+no router ospf 100
+!
+router ospfv3 1
+ address-family ipv6 unicast
+  area 1 stub no-summary
+ exit-address-family
+!
+interface Loopback0
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet2
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet3
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet4
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet5
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 1
+!
+interface GigabitEthernet6
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 1
+!
+! END Expected configuration result: insomnia/core-rtr3
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

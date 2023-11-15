@@ -1,0 +1,92 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: startup/inet-rtr1
+!
+hostname inet-rtr1
+!
+vrf definition Mgmt-vrf
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+no logging console
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authorization console
+aaa authorization exec default local
+!
+!
+clock timezone UTC 0 0
+clock calendar-valid
+vtp mode off
+!
+no ip domain lookup
+ip domain name local.lab
+!
+ipv6 unicast-routing
+!
+enable secret 1234QWer!
+username developer privilege 15 secret 1234QWer!
+!
+interface GigabitEthernet1
+ description Management
+ vrf forwarding Mgmt-vrf
+ ip address 192.168.10.11 255.255.255.0
+ negotiation auto
+ ipv6 address 2001:DB8:C15:C0::11/64
+ no shutdown
+!
+interface GigabitEthernet2
+ shutdown
+!
+interface GigabitEthernet3
+ shutdown
+!
+interface GigabitEthernet4
+ shutdown
+!
+interface GigabitEthernet5
+ shutdown
+!
+no ip forward-protocol nd
+no ip http server
+ip http authentication local
+no ip http secure-server
+!
+ip ssh version 2
+!
+!
+line con 0
+ logging synchronous
+!
+line vty 0 4
+ exec-timeout 0 0
+ logging synchronous
+ transport input ssh
+!
+line vty 5 15
+ exec-timeout 0 0
+ logging synchronous
+ transport input ssh
+!
+event manager applet generate_ssh_key authorization bypass
+ event timer cron cron-entry "@reboot" maxrun 30
+ action 1.0 cli command "enable"
+ action 1.1 cli command "config t"
+ action 1.2 cli command "crypto key generate rsa modulus 2048 general-keys"
+ action 1.3 cli command "end"
+ action 1.4 cli command "write mem" pattern "confirm|#"
+ action 1.5 regexp "confirm" "$_cli_result"
+ action 1.6 if $_regexp_result eq "1"
+ action 1.7  cli command "y"
+ action 1.8 end
+ action 1.9 cli command "config t"
+ action 2.0 cli command "no event manager applet generate_ssh_key"
+!
+! END Expected configuration result: startup/inet-rtr1
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

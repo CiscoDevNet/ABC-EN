@@ -1,0 +1,22 @@
+#############################################################################
+# These collections / roles are pre-installed into the student VM virtual
+# environment.
+# To add packages or change versions, edit the requirements.yml file located
+# at:
+#     support_files/lab_prep_files/lab_prep_files/requirements.yml
+#
+# Collections and roles defined in that file will be installed during
+# initial system boot.
+#############################################################################
+---
+collections:
+  - name: cisco.ios
+    version: "==5.1.0"
+  - name: ansible.netcommon
+    version: "==5.2.0"
+  - name: ansible.utils
+    version: "==2.11.0"
+  - name: community.general
+    version: "==7.5.0"
+  - name: community.crypto
+    version: "==2.15.1"

@@ -1,0 +1,15 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: pyats_testing/core-rtr4
+!
+ip http secure-server
+restconf
+netconf-yang
+netconf-yang feature candidate-datastore
+netconf-yang feature side-effect-sync
+!
+lldp run
+!
+! END Expected configuration result: pyats_testing/core-rtr4
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

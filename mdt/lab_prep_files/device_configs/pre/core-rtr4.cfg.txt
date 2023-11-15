@@ -1,0 +1,109 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: pyats_testing/core-rtr4
+!
+ip http secure-server
+restconf
+netconf-yang
+netconf-yang feature candidate-datastore
+netconf-yang feature side-effect-sync
+!
+lldp run
+!
+! END Expected configuration result: pyats_testing/core-rtr4
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: pyats_config/core-rtr4
+!
+interface Loopback0
+ description Local Loopback
+ ipv6 address 2001:db8:0:255::4/128
+ ipv6 address fe80::4 link-local
+ no shutdown
+!
+interface GigabitEthernet2
+ description To inet-rtr2.g5
+ ipv6 address 2001:db8:0:24::4/64
+ ipv6 address fe80::4 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet3
+ description To inet-rtr1.g4
+ ipv6 address 2001:db8:0:14::4/64
+ ipv6 address fe80::4 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet4
+ description To core-rtr1.g4
+ ipv6 address 2001:db8:0:34::4/64
+ ipv6 address fe80::4 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet5
+ description To access-rtr1.g3
+ ipv6 address 2001:db8:0:45::4/64
+ ipv6 address fe80::4 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet6
+ description To access-rtr2.g2
+ ipv6 address 2001:db8:0:46::4/64
+ ipv6 address fe80::4 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+ntp source Loopback0
+ntp server 2001:db8:0:255::1
+ntp server 2001:db8:0:255::2
+!
+! END Expected configuration result: pyats_config/core-rtr4
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: python/core-rtr4
+!
+no router ospf 100
+!
+router ospfv3 1
+ address-family ipv6 unicast
+  area 1 stub no-summary
+ exit-address-family
+!
+interface Loopback0
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet2
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet3
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet4
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet5
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 1
+!
+interface GigabitEthernet6
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 1
+!
+! END Expected configuration result: python/core-rtr4
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

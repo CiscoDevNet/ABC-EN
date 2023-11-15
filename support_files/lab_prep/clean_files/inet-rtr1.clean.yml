@@ -1,0 +1,44 @@
+##########################################################################
+# pyATS clean file to initialize a given lab. The calling script controls
+# the environment variables.
+#
+# DEVICE: inet-rtr1
+#
+# Copyright (c) 2023 Cisco and/or its affiliates.
+#
+# This software is licensed to you under the terms of the Cisco Sample
+# Code License, Version 1.1 (the "License"). You may obtain a copy of the
+# License at
+#
+#                https://developer.cisco.com/docs/licenses
+#
+# All use of the material herein must be in accordance with the terms of
+# the License. All rights not expressly granted by the License are
+# reserved. Unless required by applicable law or agreed to separately in
+# writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+# or implied.
+##########################################################################
+---
+cleaners:
+  PyatsDeviceClean:
+    module: genie.libs.clean
+    devices:
+      - inet-rtr1
+
+devices:
+  inet-rtr1:
+    connect:
+      timeout: 15
+      retry_timeout: 600
+      retry_interval: 30
+
+    apply_configuration:
+      configuration_from_file: "%ENV{DEVICE_CONFIG_PATH}/%{self}.cfg.txt"
+      config_timeout: 60
+      config_stable_time: 20
+      max_time: 300
+
+    order:
+      - connect
+      - apply_configuration

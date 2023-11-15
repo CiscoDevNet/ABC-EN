@@ -1,0 +1,57 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: ansible_playbooks/inet-rtr2
+!
+ip http secure-server
+restconf
+netconf-yang
+netconf-yang feature candidate-datastore
+netconf-yang feature side-effect-sync
+!
+lldp run
+!
+interface Loopback0
+ description Local Loopback
+ ipv6 address 2001:db8:0:255::2/128
+ ipv6 address fe80::2 link-local
+ no shutdown
+!
+interface GigabitEthernet2
+ description To provider-rtr-2.g2
+ ipv6 address 2001:db8:def:22::2/64
+ ipv6 address fe80::2 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet3
+ description To inet-rtr1.g3
+ ipv6 address 2001:db8:0:12::2/64
+ ipv6 address fe80::2 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet4
+ description To core-rtr3.g3
+ ipv6 address 2001:db8:0:23::2/64
+ ipv6 address fe80::2 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+interface GigabitEthernet5
+ description To core-rtr4.g2
+ ipv6 address 2001:db8:0:24::2/64
+ ipv6 address fe80::2 link-local
+ lldp transmit
+ lldp receive
+ no shutdown
+!
+ntp source Loopback0
+ntp server 2001:db8:def:22::ffff
+ntp peer 2001:db8:0:255::1
+!
+! END Expected configuration result: ansible_playbooks/inet-rtr2
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

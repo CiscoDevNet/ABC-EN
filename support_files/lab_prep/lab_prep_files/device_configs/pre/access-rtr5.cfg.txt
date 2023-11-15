@@ -1,0 +1,15 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: pre-lab/access-rtr5
+!
+!
+ipv6 unicast-routing
+!
+interface Loopback0
+ description Local Loopback
+ ip address 172.16.100.15 255.255.255.255
+!
+!
+! END Expected configuration result: pre-lab/access-rtr5
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

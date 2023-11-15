@@ -1,0 +1,39 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: pre-lab/inet-rtr2
+!
+!
+ipv6 unicast-routing
+!
+interface Loopback0
+ description Local Loopback
+ ip address 172.16.100.12 255.255.255.255
+!
+!
+router ospf 100
+ router-id 2.2.2.2
+ network 172.16.254.0 0.0.0.3 area 0
+!
+router bgp 65123
+ bgp router-id interface Loopback0
+ bgp log-neighbor-changes
+ no bgp default ipv4-unicast
+ neighbor 2001:DB8:0:255::1 remote-as 65123
+ neighbor 2001:DB8:0:255::1 update-source Loopback0
+ neighbor 2001:DB8:DEF:22::FFFF remote-as 64502
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+  network 2001:DB8:0:255::12/128
+  aggregate-address 2001:DB8::/48 summary-only
+  neighbor 2001:DB8:0:255::1 activate
+  neighbor 2001:DB8:0:255::1 next-hop-self
+  neighbor 2001:DB8:DEF:22::FFFF activate
+ exit-address-family
+!
+!
+! END Expected configuration result: pre-lab/inet-rtr2
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

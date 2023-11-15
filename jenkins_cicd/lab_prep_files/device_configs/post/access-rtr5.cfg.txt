@@ -1,0 +1,65 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: jenkins_cicd/access-rtr5
+!
+lldp run
+!
+router ospfv3 1
+ !
+ address-family ipv6 unicast
+  area 1 stub
+ exit-address-family
+!
+interface Loopback0
+ description Local Loopback
+ ip address 172.16.100.15 255.255.255.255
+ ipv6 address FE80::5 link-local
+ ipv6 address 2001:DB8:0:255::5/128
+!
+interface GigabitEthernet2
+ description To core-rtr3.g6
+ no shutdown
+ ipv6 address FE80::5 link-local
+ ipv6 address 2001:DB8:0:35::5/64
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 1
+ lldp transmit
+ lldp receive
+!
+interface GigabitEthernet3
+ description To core-rtr4.g5
+ no shutdown
+ ipv6 address FE80::5 link-local
+ ipv6 address 2001:DB8:0:45::5/64
+ ospfv3 network point-to-point
+ ospfv3 1 ipv6 area 1
+ lldp transmit
+ lldp receive
+!
+ip http secure-server
+!
+ntp source Loopback0
+ntp server 2001:DB8:0:255::4
+ntp server 2001:DB8:0:255::3
+!
+telemetry ietf subscription 11
+ encoding encode-kvgpb
+ filter xpath /interfaces-ios-xe-oper:interfaces/interface/statistics
+ source-vrf Mgmt-vrf
+ source-address 2001:db8:c15:c0::15
+ stream yang-push
+ update-policy periodic 500
+ receiver name telegraf
+!
+telemetry receiver protocol telegraf
+ host ip-address 2001:db8:c15:c0::103 57000
+ protocol grpc-tcp
+!
+netconf-yang
+netconf-yang feature candidate-datastore
+netconf-yang feature side-effect-sync
+restconf
+!
+! END Expected configuration result: jenkins_cicd/access-rtr5
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

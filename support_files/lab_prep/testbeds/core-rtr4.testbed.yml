@@ -1,0 +1,22 @@
+---
+extends:
+  - servers.testbed.yml
+
+devices:
+  core-rtr4:
+    os: iosxe
+    platform: cat8k
+    connections:
+      defaults:
+        class: unicon.Unicon
+        via: cli
+      cli:
+        protocol: ssh
+        ip: 2001:db8:c15:c0::14
+        ssh_options: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+      arguments:
+        learn_hostname: true
+    credentials:
+      default:
+        username: developer
+        password: 1234QWer!

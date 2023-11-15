@@ -1,0 +1,76 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: pre-lab/provider-rtr1
+!
+!
+ipv6 unicast-routing
+!
+class-map match-any ICMP-LIMIT
+ match protocol ipv6-icmp
+ match protocol icmp
+!
+policy-map ICMP-OUT
+ class ICMP-LIMIT
+  police 64000 conform-action transmit  exceed-action drop  violate-action drop
+ class class-default
+!
+interface Loopback0
+ description Local loopback
+ ip address 172.16.100.21 255.255.255.255
+ ipv6 address FE80::ABC:FFFF link-local
+ no shutdown
+!
+interface Loopback99
+ description Loopback for route injection
+ no ip address
+ shutdown
+ ipv6 address 2001:DB8:1111:1::1/64
+ ipv6 address 2001:DB8:1111:11::1/64
+ ipv6 address 2001:DB8:1111:21::1/64
+ ipv6 address 2001:DB8:1111:31::1/64
+ ipv6 address 2001:DB8:1111:41::1/64
+ ipv6 address 2001:DB8:1111:51::1/64
+ ipv6 address 2001:DB8:1111:61::1/64
+ ipv6 address 2001:DB8:1111:71::1/64
+!
+interface GigabitEthernet2
+ description To inet-rtr1.g2
+ no ip address
+ negotiation auto
+ ipv6 address FE80::ABC:FFFF link-local
+ ipv6 address 2001:DB8:ABC:11::FFFF/64
+ service-policy output ICMP-OUT
+ no shutdown
+!
+router bgp 64501
+ bgp router-id interface Loopback0
+ bgp log-neighbor-changes
+ no bgp default ipv4-unicast
+ neighbor 2001:DB8:ABC:11::1 remote-as 65123
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+  redistribute connected
+  neighbor 2001:DB8:ABC:11::1 activate
+  neighbor 2001:DB8:ABC:11::1 route-map RM-CUSTOMER-ONLY in
+ exit-address-family
+!
+ip http secure-server
+!
+ip as-path access-list 10 permit ^65123$
+!
+!
+route-map RM-CUSTOMER-ONLY permit 10
+ match as-path 10
+!
+ntp master 1
+!
+netconf-yang
+netconf-yang feature candidate-datastore
+restconf
+!
+! END Expected configuration result: pre-lab/provider-rtr1
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

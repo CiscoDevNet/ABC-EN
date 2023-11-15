@@ -1,0 +1,11 @@
+---
+testbed:
+  name: testbed_ABC-EN-A-DDL
+  servers:
+    scp:
+      server: student-vm
+      address: 192.168.10.102
+      credentials:
+        default:
+          username: student
+          password: 1234QWer

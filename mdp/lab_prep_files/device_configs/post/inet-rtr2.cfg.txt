@@ -1,0 +1,28 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: mdp/inet-rtr2
+!
+router bgp 65123
+ bgp router-id interface Loopback0
+ bgp log-neighbor-changes
+ no bgp default ipv4-unicast
+ neighbor 2001:DB8:0:255::1 remote-as 65123
+ neighbor 2001:DB8:0:255::1 description To inet-rtr1.Loopback0
+ neighbor 2001:DB8:0:255::1 update-source Loopback0
+ neighbor 2001:DB8:DEF:22::FFFF remote-as 64502
+ neighbor 2001:DB8:DEF:22::FFFF description To provider-rtr2
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+  network 2001:DB8:0:255::12/128
+  aggregate-address 2001:DB8::/48 summary-only
+  neighbor 2001:DB8:0:255::1 activate
+  neighbor 2001:DB8:0:255::1 next-hop-self
+  neighbor 2001:DB8:DEF:22::FFFF activate
+ exit-address-family
+!
+! END Expected configuration result: mdp/inet-rtr2
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

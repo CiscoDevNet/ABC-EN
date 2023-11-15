@@ -1,0 +1,47 @@
+##########################################################################
+# pyATS clean file to be used when perform a full device clean / reset.
+# This will assume that a device has an applied running-config which is
+# NOT the base case; for example, after initial boot where each device
+# has received a lab setup config. This would reset everything to the
+# initial state, ready for the next instantiation.
+#
+# DEVICE: ALL DEVICES (extends every other clean file for the DDL)
+#
+# Copyright (c) 2023 Cisco and/or its affiliates.
+#
+# This software is licensed to you under the terms of the Cisco Sample
+# Code License, Version 1.1 (the "License"). You may obtain a copy of the
+# License at
+#
+#                https://developer.cisco.com/docs/licenses
+#
+# All use of the material herein must be in accordance with the terms of
+# the License. All rights not expressly granted by the License are
+# reserved. Unless required by applicable law or agreed to separately in
+# writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+# or implied.
+##########################################################################
+---
+cleaners:
+  PyatsDeviceClean:
+    module: genie.libs.clean
+    devices:
+      - provider-rtr1
+      - provider-rtr2
+      - inet-rtr1
+      - inet-rtr2
+      - core-rtr3
+      - core-rtr4
+      - access-rtr5
+      - access-rtr6
+
+extends:
+  - "%ENV{CLEAN_FILE_PATH}/access-rtr6.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/access-rtr5.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/core-rtr4.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/core-rtr3.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/inet-rtr2.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/inet-rtr1.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/provider-rtr2.clean.yml"
+  - "%ENV{CLEAN_FILE_PATH}/provider-rtr1.clean.yml"

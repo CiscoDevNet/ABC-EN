@@ -1,0 +1,29 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: mdt/inet-rtr1
+!
+telemetry receiver protocol telegraf
+ host ip-address 2001:db8:c15:c0::103 57000
+ protocol grpc-tcp
+!
+telemetry ietf subscription 10
+ encoding encode-kvgpb
+ filter xpath /bgp-ios-xe-oper:bgp-state-data/neighbors/neighbor/installed-prefixes
+ source-address 2001:db8:c15:c0::11
+ source-vrf Mgmt-vrf
+ stream yang-push
+ update-policy periodic 500
+ receiver name telegraf
+!
+telemetry ietf subscription 11
+ encoding encode-kvgpb
+ filter xpath /interfaces-ios-xe-oper:interfaces/interface/statistics
+ source-address 2001:db8:c15:c0::11
+ source-vrf Mgmt-vrf
+ stream yang-push
+ update-policy periodic 500
+ receiver name telegraf
+!
+! END Expected configuration result: mdt/inet-rtr1
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!

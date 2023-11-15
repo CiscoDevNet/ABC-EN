@@ -1,0 +1,10 @@
+---
+extends:
+  - access-rtr6.testbed.yml
+  - access-rtr5.testbed.yml
+  - core-rtr4.testbed.yml
+  - core-rtr3.testbed.yml
+  - inet-rtr2.testbed.yml
+  - inet-rtr1.testbed.yml
+  - provider-rtr2.testbed.yml
+  - provider-rtr1.testbed.yml

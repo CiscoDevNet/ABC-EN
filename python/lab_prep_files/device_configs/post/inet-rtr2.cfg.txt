@@ -1,0 +1,29 @@
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! BEGIN Expected configuration result: python/inet-rtr2
+!
+no router ospf 100
+!
+router ospfv3 1
+ address-family ipv6 unicast
+  default-information originate always
+ exit-address-family
+!
+interface Loopback0
+ ospfv3 1 ipv6 area 0
+!
+interface GigabitEthernet3
+ ospfv3 1 ipv6 area 0
+ ospfv3 network point-to-point
+!
+interface GigabitEthernet4
+ ospfv3 1 ipv6 area 0
+ ospfv3 network point-to-point
+!
+interface GigabitEthernet5
+ ospfv3 1 ipv6 area 0
+ ospfv3 network point-to-point
+!
+! END Expected configuration result: python/inet-rtr2
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
