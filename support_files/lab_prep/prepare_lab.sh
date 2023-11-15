@@ -92,14 +92,18 @@ echo "Installing additional Python packages..."
 echo "******************************************************************************"
 echo
 
-# Update pip, setuptools, wheel to avoid nagging and possible install issues
-${PYTHON_PIP_BIN} install --upgrade pip setuptools wheel
-
 if [ -e ${LAB_PIP_REQUIREMENTS} ]; then
+    ${PYTHON_PIP_BIN} install --upgrade pip setuptools wheel \
+        2>&1 > ${LOG_PATH}/pip_lab_install.log.txt
+
+    if [ $? -ne 0 ]; then
+        LAB_INIT_RESULT=$(expr ${LAB_INIT_RESULT} + 1)
+    fi
+
     ${PYTHON_PIP_BIN} install \
-    --upgrade \
-    -r ${LAB_PIP_REQUIREMENTS} \
-    2>&1 > ${LOG_PATH}/pip_lab_install.log.txt
+        --upgrade \
+        -r ${LAB_PIP_REQUIREMENTS} \
+        2>&1 >> ${LOG_PATH}/pip_lab_install.log.txt
 
     if [ $? -ne 0 ]; then
         LAB_INIT_RESULT=$(expr ${LAB_INIT_RESULT} + 1)
