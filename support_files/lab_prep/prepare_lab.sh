@@ -29,6 +29,9 @@
 # or implied.
 ##########################################################################
 
+# Disable sudo messages in the golde image
+[ ! -f ~/.sudo_as_admin_successful ] && touch ~/.sudo_as_admin_successful
+
 # Accumulator for any non-true status results
 LAB_INIT_RESULT=0
 
