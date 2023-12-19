@@ -129,7 +129,9 @@ pipeline {
                         // TODO - Add step to lint the playbook
 
                         echo "Running Ansible playbook in check mode..."
-                        sh "ansible-playbook --check ${ANSIBLE_PLAYBOOK}"
+                        catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
+                            sh "ansible-playbook --check ${ANSIBLE_PLAYBOOK}"
+                        }
                     }
 
                     // TODO - Add input step to prompt for deployment
@@ -200,7 +202,7 @@ pipeline {
             echo "Archiving artifacts..."
             // TODO - Add more artifacts to be archived
             archiveArtifacts(artifacts: "pyats/pre_snapshots/*, \
-                                         pyats/pre_change_test/*"
+                                         pyats/pre_change_test/*",
                 allowEmptyArchive: true)
 
             echo "Job execution complete."

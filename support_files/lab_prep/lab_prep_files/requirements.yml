@@ -3,3 +3,14 @@
 # by ansible-galaxy upon system boot.
 #############################################################################
 ---
+collections:
+  - name: cisco.ios
+    version: "==5.1.0"
+  - name: ansible.netcommon
+    version: "==5.2.0"
+  - name: ansible.utils
+    version: "==2.11.0"
+  - name: community.general
+    version: "==7.5.0"
+  - name: community.crypto
+    version: "==2.15.1"

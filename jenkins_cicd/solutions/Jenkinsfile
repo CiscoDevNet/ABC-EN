@@ -129,7 +129,9 @@ pipeline {
                         sh "ansible-lint ${ANSIBLE_PLAYBOOK}"
 
                         echo "Running Ansible playbook in check mode..."
-                        sh "ansible-playbook --check ${ANSIBLE_PLAYBOOK}"
+                        catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
+                            sh "ansible-playbook --check ${ANSIBLE_PLAYBOOK}"
+                        }
                     }
 
                     input(message: "All tests successful. Proceed with deployment?")

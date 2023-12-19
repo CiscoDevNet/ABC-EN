@@ -10,6 +10,9 @@ all:
       hosts:
         access-rtr5:
         access-rtr6:
+    all_routers:
+      children:
+        access_routers:
       vars:
         ansible_connection: ansible.netcommon.network_cli
         ansible_network_os: cisco.ios.ios

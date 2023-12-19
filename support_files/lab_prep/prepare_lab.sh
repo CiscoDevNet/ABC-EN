@@ -29,9 +29,6 @@
 # or implied.
 ##########################################################################
 
-# Disable sudo messages in the golde image
-[ ! -f ~/.sudo_as_admin_successful ] && touch ~/.sudo_as_admin_successful
-
 # Accumulator for any non-true status results
 LAB_INIT_RESULT=0
 
@@ -95,6 +92,7 @@ echo "Installing additional Python packages..."
 echo "******************************************************************************"
 echo
 
+# Note: this might result in status != 0 if no requirements are listed.
 if [ -e ${LAB_PIP_REQUIREMENTS} ]; then
     ${PYTHON_PIP_BIN} install --upgrade pip setuptools wheel \
         2>&1 > ${LOG_PATH}/pip_lab_install.log.txt
@@ -119,6 +117,7 @@ echo "Installing additional Ansible roles and collections..."
 echo "******************************************************************************"
 echo
 
+# Note: this might result in status != 0 if no requirements are listed.
 if [ -x ${ANSIBLE_GALAXY_BIN} ] && [ -f ${LAB_GALAXY_REQUIREMENTS} ]; then
     ${ANSIBLE_GALAXY_BIN} install \
         -r ${LAB_GALAXY_REQUIREMENTS} \
