@@ -20,7 +20,7 @@
       vars:
         interface_name: "{{ item | first }}"
         desired_description: "{{ item[interface_name].description }}"
-        configured_description: |
+        configured_description: >-
           {{ ansible_facts.net_interfaces[interface_name].description }}
       when:
         - "'description' in item[interface_name]"
@@ -37,7 +37,7 @@
         address_query: |
           gathered[?name=='{{ item | first }}'][].ipv6[?link_local].address[] |
           [0]
-        configured_address: |
+        configured_address: >-
           {{ interface_l3_config | json_query(address_query) }}
       when:
         - "'link_local' in item[interface_name]"
@@ -53,7 +53,7 @@
         desired_address: "{{ item[interface_name].ipv6_address }}"
         address_query: |
           gathered[?name=='{{ item | first }}'][].ipv6[?!link_local].address[]
-        configured_address: |
+        configured_address: >-
           {{ interface_l3_config | json_query(address_query) }}
       when:
         - "'ipv6_address' in item[interface_name]"
