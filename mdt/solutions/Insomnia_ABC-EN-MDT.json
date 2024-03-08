@@ -465,7 +465,7 @@
       "method": "PUT",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"mdt-subscription\": [\n\t\t{\n\t\t\t\"subscription-id\": 11\n\t\t\t\"base\": {\n\t\t\t\t\"stream\": \"yang-push\",\n\t\t\t\t\"encoding\": \"encode-kvgpb\",\n\t\t\t\t\"source-vrf\": \"Mgmt-vrf\",\n\t\t\t\t\"source-address\": \"2001:db8:c15:c0::11\",\n\t\t\t\t\"period\": 500,\n\t\t\t\t\"xpath\": \"/interfaces-ios-xe-oper:interfaces/interface/statistics\"\n\t\t\t},\n\t\t\t\"mdt-receiver-names\": {\n\t\t\t\t\"mdt-receiver-name\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"name\": \"telegraf\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t}\n\t]\n}"
+        "text": "{\n\t\"mdt-subscription\": [\n\t\t{\n\t\t\t\"subscription-id\": 11,\n\t\t\t\"base\": {\n\t\t\t\t\"stream\": \"yang-push\",\n\t\t\t\t\"encoding\": \"encode-kvgpb\",\n\t\t\t\t\"source-vrf\": \"Mgmt-vrf\",\n\t\t\t\t\"source-address\": \"2001:db8:c15:c0::11\",\n\t\t\t\t\"period\": 500,\n\t\t\t\t\"xpath\": \"/interfaces-ios-xe-oper:interfaces/interface/statistics\"\n\t\t\t},\n\t\t\t\"mdt-receiver-names\": {\n\t\t\t\t\"mdt-receiver-name\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"name\": \"telegraf\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t}\n\t]\n}"
       },
       "parameters": [],
       "headers": [

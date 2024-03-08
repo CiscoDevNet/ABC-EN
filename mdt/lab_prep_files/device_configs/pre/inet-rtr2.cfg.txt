@@ -73,7 +73,7 @@ router bgp 65123
  exit-address-family
  !
  address-family ipv6
-  network 2001:DB8:0:255::12/128
+  network 2001:DB8:0:255::2/128
   aggregate-address 2001:DB8::/48 summary-only
   neighbor 2001:DB8:0:255::1 activate
   neighbor 2001:DB8:0:255::1 next-hop-self
