@@ -21,5 +21,5 @@
 ##########################################################################
 
 # Disable sudo messages in the golden image
-[ ! -f ~/.sudo_as_admin_successful ] && touch ~/.sudo_as_admin_successful
+touch ~/.sudo_as_admin_successful
 
