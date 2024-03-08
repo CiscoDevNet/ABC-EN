@@ -15,18 +15,11 @@ router ospf 100
  network 172.16.254.0 0.0.0.3 area 0
 !
 ip sla 1
- icmp-echo 2001:DB8:1111:1::1
-  request-data-size 4096
+ udp-echo 2001:db8:1111:1::1 11111
+  request-data-size 1500
   threshold 500
   timeout 1000
   frequency 1
-!
-ip sla 2
-  icmp-echo 2001:DB8:2222:2::2
-   request-data-size 8192
-   threshold 500
-   timeout 1000
-   frequency 1
 !
 ! END Expected configuration result: pre-lab/inet-rtr1
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
