@@ -34,18 +34,11 @@ router bgp 65123
  exit-address-family
 !
 ip sla 1
- icmp-echo 2001:DB8:1111:1::1
-  request-data-size 4096
+ udp-echo 2001:db8:2222:2::2 22221
+  request-data-size 1500
   threshold 500
   timeout 1000
   frequency 1
-!
-ip sla 2
-  icmp-echo 2001:DB8:2222:2::2
-   request-data-size 8192
-   threshold 500
-   timeout 1000
-   frequency 1
 !
 telemetry receiver protocol telegraf
  host ip-address 2001:db8:c15:c0::103 57000

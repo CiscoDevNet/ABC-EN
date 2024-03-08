@@ -7,11 +7,11 @@ import argparse
 from netmiko import ConnectHandler
 from connection_defs import devices
 
-TRAFFIC_TIME = 60  # seconds
+TRAFFIC_TIME = 120  # seconds
 
 config_commands = [
+    "no ip sla schedule 1",
     f"ip sla schedule 1 start-time now life {TRAFFIC_TIME}",
-    f"ip sla schedule 2 start-time now life {TRAFFIC_TIME}"
 ]
 
 if __name__ == "__main__":

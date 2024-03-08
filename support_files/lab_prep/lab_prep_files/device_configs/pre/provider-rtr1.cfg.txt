@@ -9,9 +9,14 @@ class-map match-any ICMP-LIMIT
  match protocol ipv6-icmp
  match protocol icmp
 !
-policy-map ICMP-OUT
+class-map match-any UDP-SLA
+ match access-group name v6-UDP-SLA
+!
+policy-map POLICE-OUT
  class ICMP-LIMIT
-  police 64000 conform-action transmit  exceed-action drop  violate-action drop
+  police 64000 conform-action transmit exceed-action drop violate-action drop
+ class UDP-SLA
+  police 52000 conform-action transmit exceed-action drop violate-action drop
  class class-default
 !
 interface Loopback0
@@ -39,7 +44,7 @@ interface GigabitEthernet2
  negotiation auto
  ipv6 address FE80::ABC:FFFF link-local
  ipv6 address 2001:DB8:ABC:11::FFFF/64
- service-policy output ICMP-OUT
+ service-policy output POLICE-OUT
  no shutdown
 !
 router bgp 64501
@@ -61,11 +66,16 @@ ip http secure-server
 !
 ip as-path access-list 10 permit ^65123$
 !
+ip sla responder
 !
 route-map RM-CUSTOMER-ONLY permit 10
  match as-path 10
 !
+ipv6 access-list v6-UDP-SLA
+ sequence 10 permit udp 2001:DB8:1111::/48 any
+!
 ntp master 1
+!
 !
 netconf-yang
 netconf-yang feature candidate-datastore
